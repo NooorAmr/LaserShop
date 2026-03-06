@@ -1,0 +1,1997 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<title>Laser Shop — فن الليزر والتصميمات المخصصة</title>
+<link rel="icon" type="image/png" href="WhatsApp Image 2026-03-05 at 10.30.00 PM.jpeg"/>
+<!-- Bootstrap 5 -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Bootstrap Icons -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
+
+<style>
+/* ════════════════════════════════════════
+   ROOT & VARIABLES
+════════════════════════════════════════ */
+:root {
+  --gold: #E2BA55;
+  --gold-light: #F0D070;
+  --gold-dark: #B8943A;
+  --gold-grad: linear-gradient(135deg, #B8943A 0%, #E2BA55 40%, #F0D070 70%, #E2BA55 100%);
+  --gold-grad-btn: linear-gradient(135deg, #E2BA55, #F0D070, #B8943A);
+  --black: #0A0A0A;
+  --black-soft: #111111;
+  --black-card: #161616;
+  --black-border: #242424;
+  --purple: #3D1A5E;
+  --purple-light: #5C2E8A;
+  --white: #F5EDD6;
+  --white-dim: #D4C8A8;
+  --muted: #9A8C70;
+  --green-wa: #25D366;
+  --font-ar: 'Cairo', sans-serif;
+  --font-en: 'Cinzel', serif;
+  --font-body-en: 'Cormorant Garamond', serif;
+  --radius: 4px;
+  --transition: 0.35s cubic-bezier(.25,.46,.45,.94);
+}
+
+/* ════════════════════════════════════════
+   BASE
+════════════════════════════════════════ */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--font-ar);
+  overflow-x: hidden;
+  direction: rtl;
+}
+body.lang-en { direction: ltr; font-family: var(--font-body-en); }
+
+/* ════════════════════════════════════════
+   LOADING SCREEN
+════════════════════════════════════════ */
+#loader {
+  position: fixed; inset: 0; z-index: 9999;
+  background: var(--black);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 24px;
+  transition: opacity 0.6s, visibility 0.6s;
+}
+#loader.hidden { opacity: 0; visibility: hidden; }
+
+.loader-logo {
+  font-family: var(--font-en);
+  font-size: 2rem;
+  background: var(--gold-grad);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  letter-spacing: 0.2em;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+.loader-subtitle {
+  font-size: 0.85rem; color: var(--muted);
+  letter-spacing: 0.3em; text-transform: uppercase;
+}
+.loader-bar-wrap {
+  width: 200px; height: 2px;
+  background: var(--black-border);
+  overflow: hidden;
+}
+.loader-bar {
+  height: 100%;
+  background: var(--gold-grad);
+  width: 0%;
+  animation: loadBar 2s ease-in-out forwards;
+}
+@keyframes loadBar { to { width: 100%; } }
+@keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.5;} }
+
+/* ════════════════════════════════════════
+   SCROLLBAR
+════════════════════════════════════════ */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--black); }
+::-webkit-scrollbar-thumb { background: var(--gold-dark); }
+
+/* ════════════════════════════════════════
+   NAVBAR
+════════════════════════════════════════ */
+#mainNav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1050;
+  height: 68px;
+  background: rgba(10,10,10,0.92);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(201,168,76,0.1);
+  transition: height var(--transition), background var(--transition);
+}
+#mainNav.scrolled { height: 58px; background: rgba(10,10,10,0.98); }
+
+.nav-brand {
+  font-family: var(--font-en);
+  font-size: 1.3rem;
+  letter-spacing: 0.15em;
+  background: var(--gold-grad);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  text-decoration: none;
+}
+.nav-brand small {
+  display: block;
+  font-size: 0.55rem;
+  letter-spacing: 0.25em;
+  -webkit-text-fill-color: var(--muted);
+}
+
+.navbar-toggler {
+  border: 1px solid rgba(201,168,76,0.4);
+  padding: 4px 8px;
+}
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(201,168,76,1)' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+.nav-link-custom {
+  color: var(--white-dim) !important;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  padding: 6px 14px !important;
+  transition: color var(--transition);
+  position: relative;
+  text-decoration: none;
+  font-family: var(--font-ar);
+  font-weight: 500;
+}
+body.lang-en .nav-link-custom { font-family: var(--font-en); font-size: 0.72rem; }
+.nav-link-custom::after {
+  content: ''; position: absolute; bottom: 0; right: 0; left: 0; height: 1px;
+  background: var(--gold);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform var(--transition);
+}
+[dir="rtl"] .nav-link-custom::after { transform-origin: right; }
+.nav-link-custom:hover { color: var(--gold) !important; }
+.nav-link-custom:hover::after { transform: scaleX(1); }
+
+.lang-toggle {
+  background: transparent;
+  border: 1px solid rgba(201,168,76,0.4);
+  color: var(--gold);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  padding: 5px 14px;
+  cursor: pointer;
+  transition: all var(--transition);
+  font-family: var(--font-ar);
+}
+.lang-toggle:hover { background: var(--gold); color: var(--black); }
+
+/* ════════════════════════════════════════
+   SECTION HELPERS
+════════════════════════════════════════ */
+.section-label {
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 14px;
+}
+.section-label span {
+  font-size: 0.68rem; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--gold); font-weight: 700;
+}
+.section-label::before, .section-label::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(to left, transparent, rgba(201,168,76,0.4));
+}
+[dir="ltr"] .section-label::before { background: linear-gradient(to right, transparent, rgba(201,168,76,0.4)); }
+[dir="ltr"] .section-label::after { background: linear-gradient(to left, transparent, rgba(201,168,76,0.4)); }
+
+.section-title {
+  font-family: var(--font-en);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  letter-spacing: 0.06em; font-weight: 700;
+  text-align: center; line-height: 1.2;
+}
+body.lang-en .section-title { font-family: var(--font-en); }
+body:not(.lang-en) .section-title { font-family: var(--font-ar); font-weight: 800; }
+.section-title .gold { color: var(--gold); }
+
+.section-desc {
+  font-size: 0.95rem; color: var(--white-dim);
+  text-align: center; max-width: 550px;
+  margin: 14px auto 50px;
+  line-height: 1.8; font-weight: 300;
+}
+
+.gold-line {
+  width: 60px; height: 2px;
+  background: var(--gold-grad);
+  margin: 16px auto 0;
+}
+
+.btn-gold {
+  background: var(--gold-grad-btn);
+  color: var(--black);
+  border: none;
+  padding: 13px 32px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex; align-items: center; gap: 8px;
+  position: relative; overflow: hidden;
+  transition: transform var(--transition), box-shadow var(--transition);
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  font-family: var(--font-ar);
+}
+body.lang-en .btn-gold { font-family: var(--font-en); font-size: 0.75rem; }
+.btn-gold::before {
+  content: ''; position: absolute; inset: 0;
+  background: rgba(255,255,255,0.2);
+  transform: translateX(-110%); transition: transform 0.4s;
+}
+.btn-gold:hover::before { transform: translateX(0); }
+.btn-gold:hover { transform: translateY(-2px); box-shadow: 0 10px 35px rgba(201,168,76,0.35); }
+
+.btn-outline-gold {
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  padding: 11px 28px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer; text-decoration: none;
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: all var(--transition);
+  font-family: var(--font-ar);
+}
+body.lang-en .btn-outline-gold { font-family: var(--font-en); font-size: 0.72rem; }
+.btn-outline-gold:hover { background: var(--gold); color: var(--black); }
+
+/* ════════════════════════════════════════
+   ANIMATE ON SCROLL
+════════════════════════════════════════ */
+.anim {
+  opacity: 0;
+  transform: translateY(35px);
+  transition: opacity 0.75s ease, transform 0.75s ease;
+}
+.anim.anim-left { transform: translateX(-40px); }
+.anim.anim-right { transform: translateX(40px); }
+.anim.visible { opacity: 1; transform: translate(0); }
+
+/* ════════════════════════════════════════
+   HERO
+════════════════════════════════════════ */
+#home {
+  min-height: 100vh;
+  display: flex; align-items: center;
+  position: relative; overflow: hidden;
+  padding-top: 68px;
+}
+
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 70% 60% at 70% 40%, rgba(61,26,94,0.45) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 40% at 20% 80%, rgba(201,168,76,0.06) 0%, transparent 55%),
+    linear-gradient(160deg, #0A0A0A 0%, #100d14 50%, #0d0b08 100%);
+}
+
+.hero-grid-overlay {
+  position: absolute; inset: 0; opacity: 0.025;
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 44px, rgba(201,168,76,0.6) 44px, rgba(201,168,76,0.6) 45px),
+    repeating-linear-gradient(90deg, transparent, transparent 44px, rgba(201,168,76,0.6) 44px, rgba(201,168,76,0.6) 45px);
+}
+
+.hero-geo {
+  position: absolute; left: -60px; top: 50%;
+  transform: translateY(-50%);
+  width: 600px; height: 600px;
+  opacity: 0.055;
+}
+[dir="ltr"] .hero-geo { left: auto; right: -60px; }
+
+.hero-content { position: relative; z-index: 2; }
+
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  border: 1px solid rgba(201,168,76,0.3);
+  padding: 7px 20px; margin-bottom: 28px;
+  font-size: 0.72rem; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--gold); font-weight: 600;
+}
+.hero-eyebrow::before, .hero-eyebrow::after { content: '✦'; font-size: 0.5rem; }
+
+.hero-title {
+  font-size: clamp(2.2rem, 6vw, 4.8rem);
+  font-weight: 900; line-height: 1.15;
+  margin-bottom: 20px;
+  font-family: var(--font-ar);
+}
+body.lang-en .hero-title { font-family: var(--font-en); font-weight: 700; }
+.hero-title .gold-text { color: var(--gold); }
+
+.hero-sub {
+  font-size: 1rem; color: var(--white-dim);
+  line-height: 1.8; font-weight: 300;
+  max-width: 480px; margin-bottom: 40px;
+}
+
+.hero-stats {
+  display: flex; gap: 36px; flex-wrap: wrap;
+  margin-top: 48px; padding-top: 36px;
+  border-top: 1px solid var(--black-border);
+}
+.stat-item .num {
+  font-family: var(--font-en);
+  font-size: 2.2rem; font-weight: 700; color: var(--gold);
+  line-height: 1;
+}
+.stat-item .lbl {
+  font-size: 0.75rem; color: var(--muted);
+  margin-top: 4px; letter-spacing: 0.1em;
+}
+
+.hero-img-wrap {
+  position: relative;
+  animation: floatUp 3s ease-in-out infinite;
+}
+@keyframes floatUp {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+.hero-img-frame {
+  width: 100%; aspect-ratio: 1;
+  max-width: 480px;
+  background: linear-gradient(135deg, #1a1208, #0d0b0e);
+  border: 1px solid rgba(201,168,76,0.2);
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden; position: relative;
+  margin: 0 auto;
+}
+.hero-img-frame::before {
+  content: '';
+  position: absolute; inset: 14px;
+  border: 1px solid rgba(201,168,76,0.08);
+  pointer-events: none; z-index: 1;
+}
+.hero-img-frame img { width: 100%; height: 100%; object-fit: cover; }
+.hero-corner {
+  position: absolute; width: 22px; height: 22px;
+}
+.hero-corner.tl { top: 6px; right: 6px; border-top: 2px solid var(--gold); border-right: 2px solid var(--gold); }
+.hero-corner.tr { top: 6px; left: 6px; border-top: 2px solid var(--gold); border-left: 2px solid var(--gold); }
+.hero-corner.bl { bottom: 6px; right: 6px; border-bottom: 2px solid var(--gold); border-right: 2px solid var(--gold); }
+.hero-corner.br { bottom: 6px; left: 6px; border-bottom: 2px solid var(--gold); border-left: 2px solid var(--gold); }
+
+/* ════════════════════════════════════════
+   PRODUCT CARDS
+════════════════════════════════════════ */
+.product-card {
+  background: var(--black-card);
+  border: 1px solid var(--black-border);
+  overflow: hidden; position: relative;
+  transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+  height: 100%;
+  display: flex; flex-direction: column;
+}
+.product-card:hover {
+  border-color: rgba(201,168,76,0.5);
+  box-shadow: 0 18px 55px rgba(0,0,0,0.5), 0 0 25px rgba(201,168,76,0.06);
+  transform: translateY(-4px);
+}
+
+.product-img-wrap {
+  position: relative; overflow: hidden;
+  height: 240px;
+  background: #0f0d0a;
+}
+.product-img-wrap img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.6s ease;
+}
+.product-card:hover .product-img-wrap img { transform: scale(1.08); }
+.product-img-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(10,10,10,0.85) 0%, transparent 55%);
+}
+
+.product-badges {
+  position: absolute; top: 12px; right: 12px;
+  display: flex; flex-direction: column; gap: 6px;
+  align-items: flex-end;
+}
+[dir="ltr"] .product-badges { right: auto; left: 12px; align-items: flex-start; }
+
+.badge-gold {
+  background: var(--gold-grad-btn);
+  color: var(--black);
+  font-size: 0.65rem; font-weight: 800;
+  padding: 3px 10px; letter-spacing: 0.05em;
+  font-family: var(--font-ar);
+}
+.badge-purple {
+  background: var(--purple);
+  color: var(--gold-light);
+  font-size: 0.65rem; font-weight: 700;
+  padding: 3px 10px;
+}
+.badge-new {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(201,168,76,0.3);
+  color: var(--gold);
+  font-size: 0.65rem; font-weight: 700;
+  padding: 3px 10px;
+}
+
+.product-body { padding: 20px 18px; flex: 1; display: flex; flex-direction: column; }
+
+.product-title {
+  font-weight: 700; font-size: 0.95rem;
+  margin-bottom: 8px; color: var(--white);
+  transition: color var(--transition);
+  line-height: 1.4;
+  font-family: var(--font-ar);
+}
+body.lang-en .product-title { font-family: var(--font-body-en); font-size: 0.9rem; }
+.product-card:hover .product-title { color: var(--gold); }
+
+.product-desc {
+  font-size: 0.78rem; color: var(--muted);
+  line-height: 1.65; margin-bottom: 18px;
+  font-weight: 300; flex: 1;
+}
+
+.product-price {
+  font-family: var(--font-en);
+  font-size: 1.1rem; color: var(--gold);
+  margin-bottom: 16px;
+}
+.product-price small {
+  font-size: 0.65rem; color: var(--muted);
+  font-family: var(--font-ar); font-weight: 400;
+  display: block; margin-bottom: 2px;
+}
+
+.product-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.btn-order-now {
+  flex: 1; background: var(--gold-grad-btn);
+  color: var(--black); border: none;
+  padding: 9px 14px; font-size: 0.78rem; font-weight: 700;
+  cursor: pointer; display: flex; align-items: center;
+  justify-content: center; gap: 6px;
+  transition: all var(--transition);
+  font-family: var(--font-ar);
+  white-space: nowrap;
+}
+body.lang-en .btn-order-now { font-family: var(--font-en); font-size: 0.68rem; letter-spacing: 0.05em; }
+.btn-order-now:hover { opacity: 0.88; transform: scale(1.02); }
+
+.btn-quote {
+  flex: 1; background: transparent;
+  border: 1px solid rgba(201,168,76,0.35);
+  color: var(--gold); padding: 9px 12px;
+  font-size: 0.78rem; font-weight: 600;
+  cursor: pointer; display: flex; align-items: center;
+  justify-content: center; gap: 6px;
+  transition: all var(--transition);
+  font-family: var(--font-ar);
+  white-space: nowrap;
+}
+body.lang-en .btn-quote { font-family: var(--font-en); font-size: 0.68rem; }
+.btn-quote:hover { background: var(--gold); color: var(--black); }
+
+/* ════════════════════════════════════════
+   WHY CHOOSE US
+════════════════════════════════════════ */
+.why-card {
+  background: var(--black-card);
+  border: 1px solid var(--black-border);
+  padding: 36px 28px;
+  position: relative; overflow: hidden;
+  text-align: center;
+  transition: all var(--transition);
+}
+.why-card::after {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 2px; background: var(--gold-grad);
+  transform: scaleX(0); transition: transform var(--transition);
+}
+.why-card:hover::after { transform: scaleX(1); }
+.why-card:hover { border-color: rgba(201,168,76,0.2); transform: translateY(-3px); }
+
+.why-icon {
+  width: 60px; height: 60px; margin: 0 auto 20px;
+  border: 1px solid rgba(201,168,76,0.3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.6rem;
+  transition: all var(--transition);
+}
+.why-card:hover .why-icon { border-color: var(--gold); background: rgba(201,168,76,0.06); }
+.why-card h5 {
+  font-family: var(--font-ar); font-weight: 700;
+  font-size: 0.9rem; margin-bottom: 10px; color: var(--white);
+  letter-spacing: 0.04em;
+}
+body.lang-en .why-card h5 { font-family: var(--font-en); font-size: 0.8rem; }
+.why-card p { font-size: 0.78rem; color: var(--muted); line-height: 1.7; font-weight: 300; }
+
+/* ════════════════════════════════════════
+   HOW IT WORKS
+════════════════════════════════════════ */
+.step-card {
+  text-align: center; padding: 30px 20px; position: relative;
+}
+.step-num {
+  font-family: var(--font-en); font-size: 4rem; font-weight: 700;
+  color: rgba(201,168,76,0.08); line-height: 1;
+  margin-bottom: -10px;
+}
+.step-icon {
+  width: 64px; height: 64px; margin: 0 auto 20px;
+  background: linear-gradient(135deg, rgba(61,26,94,0.4), rgba(10,10,10,0.8));
+  border: 1px solid rgba(201,168,76,0.3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.8rem;
+  position: relative;
+}
+.step-icon::before {
+  content: attr(data-num);
+  position: absolute; top: -10px; right: -10px;
+  width: 22px; height: 22px;
+  background: var(--gold-grad-btn);
+  color: var(--black);
+  font-size: 0.65rem; font-weight: 800;
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-en);
+}
+[dir="ltr"] .step-icon::before { right: auto; left: -10px; }
+.step-card h5 {
+  font-family: var(--font-ar); font-weight: 700;
+  margin-bottom: 10px; font-size: 0.92rem; color: var(--white);
+}
+body.lang-en .step-card h5 { font-family: var(--font-en); font-size: 0.8rem; }
+.step-card p { font-size: 0.78rem; color: var(--muted); line-height: 1.65; }
+
+/* Connector line between steps */
+.step-connector {
+  position: absolute; top: 82px;
+  width: 60%; left: 70%;
+  height: 1px;
+  background: linear-gradient(to right, rgba(201,168,76,0.4), transparent);
+}
+[dir="rtl"] .step-connector { left: auto; right: 70%; background: linear-gradient(to left, rgba(201,168,76,0.4), transparent); }
+
+/* ════════════════════════════════════════
+   REVIEWS
+════════════════════════════════════════ */
+.review-card {
+  background: var(--black-card);
+  border: 1px solid var(--black-border);
+  padding: 30px 26px;
+  transition: all var(--transition);
+}
+.review-card:hover { border-color: rgba(201,168,76,0.25); transform: translateY(-3px); }
+.review-stars { color: var(--gold); font-size: 0.85rem; margin-bottom: 14px; }
+.review-quote {
+  font-family: var(--font-en); font-size: 2.8rem;
+  color: rgba(201,168,76,0.18); line-height: 0.8; margin-bottom: 10px;
+}
+.review-text {
+  font-size: 0.88rem; color: var(--white-dim);
+  line-height: 1.8; font-weight: 300; margin-bottom: 20px;
+}
+.review-author { display: flex; align-items: center; gap: 12px; }
+.review-avatar {
+  width: 42px; height: 42px; border-radius: 50%;
+  background: var(--gold-grad-btn);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-en); font-weight: 700; font-size: 1rem;
+  color: var(--black); flex-shrink: 0;
+}
+.review-name { font-size: 0.82rem; font-weight: 700; color: var(--white); }
+.review-loc { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
+
+/* ════════════════════════════════════════
+   CUSTOM ORDER BANNER
+════════════════════════════════════════ */
+.custom-order-section {
+  background:
+    radial-gradient(ellipse 80% 80% at 50% 50%, rgba(61,26,94,0.35) 0%, transparent 70%),
+    var(--black-soft);
+  border-top: 1px solid var(--black-border);
+  border-bottom: 1px solid var(--black-border);
+  text-align: center; padding: 80px 20px;
+  position: relative; overflow: hidden;
+}
+.custom-order-section::before {
+  content: '✦';
+  position: absolute; font-size: 18rem;
+  color: rgba(201,168,76,0.02);
+  top: 50%; left: 50%; transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+/* ════════════════════════════════════════
+   COUNTDOWN
+════════════════════════════════════════ */
+.countdown-section {
+  background: linear-gradient(135deg, #0d0b0e, #110c08);
+  border: 1px solid rgba(201,168,76,0.15);
+  padding: 60px 20px; text-align: center;
+  position: relative; overflow: hidden;
+}
+.countdown-wrap { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+.cd-box {
+  background: var(--black);
+  border: 1px solid rgba(201,168,76,0.3);
+  padding: 20px 28px; min-width: 90px;
+  text-align: center;
+}
+.cd-num {
+  font-family: var(--font-en); font-size: 2.8rem; font-weight: 700;
+  color: var(--gold); line-height: 1;
+}
+.cd-lbl { font-size: 0.65rem; color: var(--muted); letter-spacing: 0.15em; margin-top: 6px; }
+
+/* ════════════════════════════════════════
+   GALLERY
+════════════════════════════════════════ */
+.gallery-item {
+  position: relative; overflow: hidden; cursor: pointer;
+  aspect-ratio: 1;
+  background: var(--black-card);
+}
+.gallery-item img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.gallery-item:hover img { transform: scale(1.1); }
+.gallery-item-overlay {
+  position: absolute; inset: 0;
+  background: rgba(10,10,10,0.75);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity var(--transition);
+}
+.gallery-item:hover .gallery-item-overlay { opacity: 1; }
+.gallery-item-overlay i { font-size: 2rem; color: var(--gold); }
+
+/* Lightbox */
+#lightbox {
+  position: fixed; inset: 0; z-index: 2000;
+  background: rgba(0,0,0,0.95);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+#lightbox.active { opacity: 1; visibility: visible; }
+#lightbox img {
+  max-width: 90vw; max-height: 85vh;
+  object-fit: contain;
+  border: 1px solid rgba(201,168,76,0.2);
+}
+.lb-close {
+  position: absolute; top: 20px; right: 24px;
+  font-size: 2rem; color: var(--gold); cursor: pointer;
+  background: none; border: none;
+}
+[dir="ltr"] .lb-close { right: auto; left: 24px; }
+.lb-prev, .lb-next {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  background: rgba(201,168,76,0.15);
+  border: 1px solid rgba(201,168,76,0.3);
+  color: var(--gold); width: 50px; height: 50px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 1.4rem;
+  transition: background var(--transition);
+}
+.lb-prev:hover, .lb-next:hover { background: rgba(201,168,76,0.3); }
+.lb-prev { right: 20px; }
+.lb-next { left: 20px; }
+[dir="ltr"] .lb-prev { right: auto; left: 20px; }
+[dir="ltr"] .lb-next { left: auto; right: 20px; }
+
+/* ════════════════════════════════════════
+   ABOUT
+════════════════════════════════════════ */
+.about-visual {
+  background: linear-gradient(135deg, #1a1208, #0d0b0e);
+  border: 1px solid rgba(201,168,76,0.2);
+  aspect-ratio: 4/5;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 8rem; position: relative; overflow: hidden;
+}
+.about-visual::before {
+  content: ''; position: absolute; inset: 16px;
+  border: 1px solid rgba(201,168,76,0.07);
+}
+.about-stat-badge {
+  position: absolute; bottom: 24px; left: -24px;
+  background: var(--black);
+  border: 1px solid rgba(201,168,76,0.3);
+  padding: 16px 22px; min-width: 140px;
+}
+[dir="ltr"] .about-stat-badge { left: auto; right: -24px; }
+.about-stat-badge .num {
+  font-family: var(--font-en); font-size: 2.2rem;
+  color: var(--gold); font-weight: 700; line-height: 1;
+}
+.about-stat-badge .lbl {
+  font-size: 0.68rem; color: var(--muted);
+  letter-spacing: 0.1em; margin-top: 4px;
+}
+
+.vision-box {
+  border-right: 2px solid var(--gold);
+  padding-right: 18px; margin: 22px 0;
+}
+[dir="ltr"] .vision-box { border-right: none; border-left: 2px solid var(--gold); padding-right: 0; padding-left: 18px; }
+.vision-box h6 {
+  font-family: var(--font-en); font-size: 0.7rem;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 6px; font-weight: 700;
+}
+.vision-box p {
+  font-size: 0.88rem; color: var(--white-dim); line-height: 1.65;
+}
+
+/* ════════════════════════════════════════
+   FAQ
+════════════════════════════════════════ */
+.faq-item {
+  background: var(--black-card);
+  border: 1px solid var(--black-border);
+  margin-bottom: 8px;
+  overflow: hidden;
+  transition: border-color var(--transition);
+}
+.faq-item.active { border-color: rgba(201,168,76,0.35); }
+.faq-question {
+  padding: 18px 22px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: space-between;
+  font-weight: 600; font-size: 0.9rem; color: var(--white);
+  user-select: none;
+  transition: color var(--transition);
+  font-family: var(--font-ar);
+  gap: 12px;
+}
+body.lang-en .faq-question { font-family: var(--font-body-en); }
+.faq-item.active .faq-question { color: var(--gold); }
+.faq-icon { color: var(--gold); font-size: 1.1rem; flex-shrink: 0; transition: transform 0.3s; }
+.faq-item.active .faq-icon { transform: rotate(45deg); }
+.faq-answer {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.4s ease;
+  padding: 0 22px;
+  font-size: 0.84rem; color: var(--white-dim);
+  line-height: 1.75; font-weight: 400;
+  font-family: var(--font-ar);
+}
+body.lang-en .faq-answer { font-family: var(--font-body-en); }
+.faq-item.active .faq-answer { max-height: 300px; padding-bottom: 18px; }
+
+/* ════════════════════════════════════════
+   FIND US / MAP
+════════════════════════════════════════ */
+.contact-item {
+  display: flex; gap: 16px; align-items: flex-start;
+  padding: 20px 0; border-bottom: 1px solid var(--black-border);
+}
+.contact-icon-wrap {
+  width: 42px; height: 42px; flex-shrink: 0;
+  border: 1px solid rgba(201,168,76,0.3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; color: var(--gold);
+}
+.contact-lbl { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 4px; }
+.contact-val { font-size: 0.9rem; color: var(--white-dim); line-height: 1.5; }
+.map-container {
+  background: var(--black-card); border: 1px solid var(--black-border);
+  overflow: hidden; height: 380px;
+}
+.map-container iframe { width: 100%; height: 100%; border: none; filter: invert(0.85) hue-rotate(200deg) saturate(0.5); }
+
+/* ════════════════════════════════════════
+   FOOTER
+════════════════════════════════════════ */
+footer {
+  background: var(--black);
+  border-top: 1px solid var(--black-border);
+}
+.footer-top { padding: 60px 0 40px; }
+.footer-brand { font-family: var(--font-en); font-size: 1.4rem; color: var(--gold); letter-spacing: 0.12em; margin-bottom: 12px; }
+.footer-brand-desc { font-size: 0.82rem; color: var(--white-dim); line-height: 1.75; max-width: 240px; font-weight: 400; }
+.footer-social { display: flex; gap: 10px; margin-top: 20px; }
+.social-link {
+  width: 36px; height: 36px;
+  border: 1px solid rgba(226,186,85,0.25);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--white-dim); font-size: 1rem;
+  text-decoration: none; transition: all var(--transition);
+}
+.social-link:hover { border-color: var(--gold); color: var(--gold); background: rgba(226,186,85,0.05); }
+.footer-heading { font-family: var(--font-en); font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 20px; font-weight: 700; }
+.footer-links { list-style: none; }
+.footer-links li { margin-bottom: 10px; }
+.footer-links a { font-size: 0.84rem; color: var(--white-dim); text-decoration: none; transition: color var(--transition); }
+.footer-links a:hover { color: var(--gold-light); }
+.footer-bottom {
+  padding: 18px 0; border-top: 1px solid var(--black-border);
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 12px;
+}
+.footer-bottom p { font-size: 0.76rem; color: var(--white-dim); }
+.footer-bottom .gold { color: var(--gold-light); }
+.handmade-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  border: 1px solid rgba(226,186,85,0.25);
+  padding: 6px 14px; font-size: 0.72rem; color: var(--white-dim);
+}
+
+/* ════════════════════════════════════════
+   WHATSAPP FLOAT
+════════════════════════════════════════ */
+.wa-float {
+  position: fixed; bottom: 28px; left: 28px; z-index: 900;
+  width: 58px; height: 58px; border-radius: 50%;
+  background: var(--green-wa);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.7rem; text-decoration: none; color: white;
+  box-shadow: 0 6px 30px rgba(37,211,102,0.45);
+  animation: waPulse 2.5s ease-in-out infinite;
+  transition: transform var(--transition);
+}
+[dir="ltr"] .wa-float { left: auto; right: 28px; }
+.wa-float:hover { transform: scale(1.12); color: white; }
+@keyframes waPulse {
+  0%, 100% { box-shadow: 0 6px 28px rgba(37,211,102,0.4); }
+  50% { box-shadow: 0 6px 40px rgba(37,211,102,0.65), 0 0 0 10px rgba(37,211,102,0.08); }
+}
+
+/* ════════════════════════════════════════
+   PAGE SECTIONS (SPA)
+════════════════════════════════════════ */
+.page { display: none; }
+.page.active { display: block; }
+
+/* ════════════════════════════════════════
+   PAGE HERO (non-home)
+════════════════════════════════════════ */
+.page-hero {
+  padding-top: 130px; padding-bottom: 60px;
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 100%, rgba(61,26,94,0.35) 0%, transparent 65%),
+    var(--black);
+  text-align: center; position: relative; overflow: hidden;
+}
+.page-hero .eyebrow {
+  font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--gold); font-weight: 700; margin-bottom: 14px;
+}
+.page-hero h1 { font-size: clamp(2rem, 5vw, 3.8rem); font-weight: 800; font-family: var(--font-ar); }
+body.lang-en .page-hero h1 { font-family: var(--font-en); font-weight: 700; }
+.page-hero p { color: var(--white-dim); font-size: 0.95rem; margin-top: 14px; max-width: 480px; margin-left: auto; margin-right: auto; }
+
+/* ════════════════════════════════════════
+   ORDER MODAL
+════════════════════════════════════════ */
+.modal-content {
+  background: var(--black-card) !important;
+  border: 1px solid rgba(201,168,76,0.3) !important;
+  border-radius: 0 !important;
+  color: var(--white);
+}
+.modal-header {
+  border-bottom: 1px solid var(--black-border) !important;
+  padding: 20px 24px;
+}
+.modal-title {
+  font-family: var(--font-ar); font-weight: 700;
+  color: var(--gold); font-size: 1rem;
+}
+body.lang-en .modal-title { font-family: var(--font-en); font-size: 0.9rem; }
+.btn-close { filter: invert(1) sepia(1) saturate(2) hue-rotate(10deg) !important; }
+.modal-body { padding: 24px; }
+.modal-footer { border-top: 1px solid var(--black-border) !important; padding: 16px 24px; }
+
+.form-label {
+  font-size: 0.8rem; font-weight: 600; color: var(--white-dim);
+  margin-bottom: 6px; letter-spacing: 0.05em;
+  font-family: var(--font-ar);
+}
+body.lang-en .form-label { font-family: var(--font-body-en); font-size: 0.85rem; }
+.form-control, .form-select {
+  background: var(--black) !important;
+  border: 1px solid var(--black-border) !important;
+  color: var(--white) !important;
+  border-radius: 0 !important;
+  padding: 10px 14px;
+  font-family: var(--font-ar);
+  font-size: 0.85rem;
+}
+.form-control:focus, .form-select:focus {
+  box-shadow: 0 0 0 2px rgba(201,168,76,0.25) !important;
+  border-color: rgba(201,168,76,0.5) !important;
+}
+.form-control::placeholder { color: var(--muted) !important; }
+
+/* ════════════════════════════════════════
+   MISC
+════════════════════════════════════════ */
+.bg-dark-soft { background: var(--black-soft); }
+.bg-dark { background: var(--black); }
+.divider-gold { border: none; border-top: 1px solid var(--black-border); margin: 0; }
+
+.section-pad { padding: 90px 0; }
+@media (max-width: 768px) {
+  .section-pad { padding: 60px 0; }
+  .hero-stats { gap: 24px; }
+  .product-btns { flex-direction: column; }
+  .btn-order-now, .btn-quote { width: 100%; }
+}
+
+/* Best Seller ribbon */
+.bestseller-ribbon {
+  position: absolute; top: 0; right: 0;
+  background: var(--gold-grad-btn);
+  color: var(--black);
+  font-size: 0.62rem; font-weight: 900;
+  padding: 5px 16px 5px 26px;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 16px 50%);
+  letter-spacing: 0.05em;
+  font-family: var(--font-ar);
+}
+[dir="ltr"] .bestseller-ribbon {
+  right: auto; left: 0;
+  clip-path: polygon(0% 0%, 100% 0%, calc(100% - 16px) 50%, 100% 100%, 0% 100%);
+  padding: 5px 26px 5px 16px;
+}
+
+/* Scrolltop */
+#scrollTop {
+  position: fixed; bottom: 100px; left: 28px; z-index: 900;
+  width: 40px; height: 40px;
+  background: rgba(201,168,76,0.12);
+  border: 1px solid rgba(201,168,76,0.35);
+  color: var(--gold); font-size: 1.1rem;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; opacity: 0; visibility: hidden;
+  transition: all var(--transition);
+}
+[dir="ltr"] #scrollTop { left: auto; right: 28px; }
+#scrollTop.visible { opacity: 1; visibility: visible; }
+#scrollTop:hover { background: var(--gold); color: var(--black); }
+
+/* section bg alternates */
+.bg-alt { background: var(--black-soft); }
+</style>
+</head>
+<body>
+
+<!-- ══════════════ LOADER ══════════════ -->
+<div id="loader">
+  <div class="loader-logo">LASER SHOP</div>
+  <div class="loader-subtitle">فن الليزر والتصميمات المخصصة</div>
+  <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
+</div>
+
+<!-- ══════════════ WHATSAPP FLOAT ══════════════ -->
+<a href="https://wa.me/201098517116" target="_blank" class="wa-float" title="WhatsApp">
+  <i class="bi bi-whatsapp"></i>
+</a>
+
+<!-- ══════════════ SCROLL TOP ══════════════ -->
+<button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <i class="bi bi-arrow-up"></i>
+</button>
+
+<!-- ══════════════ NAVBAR ══════════════ -->
+<nav id="mainNav" class="navbar navbar-expand-lg fixed-top">
+  <div class="container">
+    <a class="nav-brand" href="#" onclick="showPage('home');return false;">
+      ✦ LASER SHOP
+      <small>فن الليزر والهدايا المخصصة</small>
+    </a>
+    <div class="d-flex align-items-center gap-3 order-lg-last">
+      <button class="lang-toggle" onclick="toggleLang()" id="langBtn">EN</button>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav mx-auto gap-1">
+        <li class="nav-item"><a class="nav-link-custom" href="#" onclick="showPage('home');closeNav();return false;" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
+        <li class="nav-item"><a class="nav-link-custom" href="#" onclick="showPage('shop');closeNav();return false;" data-ar="المتجر" data-en="Shop">المتجر</a></li>
+        <li class="nav-item"><a class="nav-link-custom" href="#" onclick="showPage('gallery');closeNav();return false;" data-ar="المعرض" data-en="Gallery">المعرض</a></li>
+        <li class="nav-item"><a class="nav-link-custom" href="#" onclick="showPage('about');closeNav();return false;" data-ar="من نحن" data-en="About Us">من نحن</a></li>
+        <li class="nav-item"><a class="nav-link-custom" href="#" onclick="showPage('faq');closeNav();return false;" data-ar="الأسئلة الشائعة" data-en="FAQ">الأسئلة الشائعة</a></li>
+        <li class="nav-item"><a class="nav-link-custom" href="#" onclick="showPage('findus');closeNav();return false;" data-ar="موقعنا" data-en="Find Us">موقعنا</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════════
+     HOME PAGE
+══════════════════════════════════════════════ -->
+<div id="page-home" class="page active">
+
+  <!-- HERO -->
+  <section id="home" style="padding-top:68px; min-height:100vh; display:flex; align-items:center; position:relative; overflow:hidden;">
+    <div class="hero-bg"></div>
+    <div class="hero-grid-overlay"></div>
+
+    <!-- Islamic Geo SVG -->
+    <svg class="hero-geo" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+      <g fill="none" stroke="#C9A84C" stroke-width="0.8">
+        <circle cx="250" cy="250" r="240"/><circle cx="250" cy="250" r="190"/>
+        <circle cx="250" cy="250" r="140"/><circle cx="250" cy="250" r="90"/>
+        <line x1="250" y1="10" x2="250" y2="490"/><line x1="10" y1="250" x2="490" y2="250"/>
+        <line x1="80" y1="80" x2="420" y2="420"/><line x1="420" y1="80" x2="80" y2="420"/>
+        <path d="M250,60 Q330,170 250,250 Q170,170 250,60"/>
+        <path d="M440,250 Q330,330 250,250 Q330,170 440,250"/>
+        <path d="M250,440 Q170,330 250,250 Q330,330 250,440"/>
+        <path d="M60,250 Q170,170 250,250 Q170,330 60,250"/>
+        <path d="M137,107 Q250,185 250,250 Q185,185 137,107"/>
+        <path d="M363,107 Q315,185 250,250 Q315,185 363,107"/>
+        <path d="M363,393 Q315,315 250,250 Q315,315 363,393"/>
+        <path d="M137,393 Q185,315 250,250 Q185,315 137,393"/>
+      </g>
+    </svg>
+
+    <div class="container" style="position:relative;z-index:2;">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6 anim">
+          <div class="hero-eyebrow" data-ar="✦ صنع بشغف في الإسكندرية ✦" data-en="✦ Handcrafted with Passion in Alexandria ✦">✦ صنع بشغف في الإسكندرية ✦</div>
+          <h1 class="hero-title" data-ar="فن الليزر والتصميمات <span class='gold-text'>المخصصة</span><br/>بين يديك" data-en="Custom Laser Cut <span class='gold-text'>Art</span><br/>In Your Hands">
+            فن الليزر والتصميمات <span class="gold-text">المخصصة</span><br/>بين يديك
+          </h1>
+          <p class="hero-sub" data-ar="منتجات خشبية وهدايا مطبوعة بلمسة شخصية فريدة — من أحدث تقنيات الليزر إلى قلبك" data-en="Wooden products and printed gifts with a unique personal touch — from the latest laser technology to your heart.">
+            منتجات خشبية وهدايا مطبوعة بلمسة شخصية فريدة — من أحدث تقنيات الليزر إلى قلبك
+          </p>
+          <div class="d-flex flex-wrap gap-3">
+            <button class="btn-gold" onclick="showPage('shop')" data-ar="🛍 تسوق الآن" data-en="🛍 Shop Now">🛍 تسوق الآن</button>
+            <a href="https://wa.me/201098517116?text=مرحباً،%20أريد%20تصميم%20خاص%20وأرغب%20بالتواصل%20معكم." target="_blank" class="btn-outline-gold" data-ar="💬 اطلب تصميم خاص" data-en="💬 Custom Order">💬 اطلب تصميم خاص</a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat-item">
+              <div class="num">500+</div>
+              <div class="lbl" data-ar="عميل سعيد" data-en="Happy Clients">عميل سعيد</div>
+            </div>
+            <div class="stat-item">
+              <div class="num">8+</div>
+              <div class="lbl" data-ar="تصنيف منتج" data-en="Product Types">تصنيف منتج</div>
+            </div>
+            <div class="stat-item">
+              <div class="num">100%</div>
+              <div class="lbl" data-ar="مخصص لك" data-en="Personalized">مخصص لك</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 anim anim-right">
+          <div class="hero-img-wrap">
+            <div class="hero-img-frame">
+              <!-- PRODUCT IMAGE: Replace src below with your main hero product image -->
+              <img src="488038154_1089464779890589_6401524738330593693_n.jpg" alt="Laser Shop Product" loading="lazy"/>
+              <div class="hero-corner tl"></div>
+              <div class="hero-corner tr"></div>
+              <div class="hero-corner bl"></div>
+              <div class="hero-corner br"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED PRODUCTS -->
+  <section class="section-pad bg-alt">
+    <div class="container">
+      <div class="section-label anim"><span data-ar="منتجاتنا المميزة" data-en="Featured Products">منتجاتنا المميزة</span></div>
+      <h2 class="section-title anim" data-ar="أبرز <span class='gold'>تصميماتنا</span>" data-en="Our <span class='gold'>Bestsellers</span>">أبرز <span class="gold">تصميماتنا</span></h2>
+      <div class="gold-line mb-5 anim"></div>
+      <div class="row g-4" id="featuredGrid"></div>
+      <div class="text-center mt-5 anim">
+        <button class="btn-gold" onclick="showPage('shop')" data-ar="عرض كل المنتجات ←" data-en="View All Products →">عرض كل المنتجات ←</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- BEST SELLERS -->
+  <section class="section-pad bg-dark">
+    <div class="container">
+      <div class="section-label anim"><span data-ar="🔥 الأكثر مبيعًا" data-en="🔥 Best Sellers">🔥 الأكثر مبيعًا</span></div>
+      <h2 class="section-title anim" data-ar="الأعلى <span class='gold'>طلبًا</span>" data-en="Most <span class='gold'>Ordered</span>">الأعلى <span class="gold">طلبًا</span></h2>
+      <div class="gold-line mb-5 anim"></div>
+      <div class="row g-4" id="bestSellersGrid"></div>
+    </div>
+  </section>
+
+  <!-- WHY CHOOSE US -->
+  <section class="section-pad bg-alt">
+    <div class="container">
+      <div class="section-label anim"><span data-ar="لماذا نحن؟" data-en="Why Choose Us">لماذا نحن؟</span></div>
+      <h2 class="section-title anim" data-ar="ما يميزنا <span class='gold'>عن غيرنا</span>" data-en="The <span class='gold'>Laser Shop</span> Difference">ما يميزنا <span class="gold">عن غيرنا</span></h2>
+      <div class="gold-line mb-5 anim"></div>
+      <div class="row g-3">
+        <div class="col-sm-6 col-lg-3 anim">
+          <div class="why-card">
+            <div class="why-icon">🪵</div>
+            <h5 data-ar="جودة عالية" data-en="Premium Quality">جودة عالية</h5>
+            <p data-ar="نستخدم أجود أنواع الخشب الطبيعي لضمان منتج يدوم لسنوات" data-en="We use the finest natural wood to ensure a product that lasts for years.">نستخدم أجود أنواع الخشب الطبيعي لضمان منتج يدوم لسنوات</p>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-3 anim" style="transition-delay:.08s">
+          <div class="why-card">
+            <div class="why-icon">✒️</div>
+            <h5 data-ar="تصميم حسب الطلب" data-en="Custom Design">تصميم حسب الطلب</h5>
+            <p data-ar="كل تصميم فريد من نوعه — اسمك، صورتك، أو أي رسالة تريد نقشها" data-en="Every design is unique — your name, photo, or any message you want engraved.">كل تصميم فريد من نوعه — اسمك، صورتك، أو أي رسالة تريد نقشها</p>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-3 anim" style="transition-delay:.16s">
+          <div class="why-card">
+            <div class="why-icon">⚡</div>
+            <h5 data-ar="تنفيذ سريع" data-en="Fast Execution">تنفيذ سريع</h5>
+            <p data-ar="معظم الطلبات تُنجز خلال 2-4 أيام عمل فقط مع الحفاظ على أعلى مستوى جودة" data-en="Most orders completed within 2-4 working days while maintaining the highest quality.">معظم الطلبات تُنجز خلال 2-4 أيام عمل فقط مع الحفاظ على أعلى مستوى جودة</p>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-3 anim" style="transition-delay:.24s">
+          <div class="why-card">
+            <div class="why-icon">🚚</div>
+            <h5 data-ar="شحن داخل وخارج الإسكندرية" data-en="Shipping Everywhere">شحن داخل وخارج الإسكندرية</h5>
+            <p data-ar="نوصل لجميع محافظات مصر مع خيارات التوصيل السريع" data-en="We deliver to all Egyptian governorates with express delivery options.">نوصل لجميع محافظات مصر مع خيارات التوصيل السريع</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section-pad bg-dark">
+    <div class="container">
+      <div class="section-label anim"><span data-ar="كيف يعمل؟" data-en="How It Works">كيف يعمل؟</span></div>
+      <h2 class="section-title anim" data-ar="3 خطوات <span class='gold'>بسيطة</span>" data-en="3 Simple <span class='gold'>Steps</span>">3 خطوات <span class="gold">بسيطة</span></h2>
+      <div class="gold-line mb-5 anim"></div>
+      <div class="row g-4 justify-content-center">
+        <div class="col-md-4 anim">
+          <div class="step-card">
+            <div class="step-icon" data-num="1">🛍</div>
+            <h5 data-ar="١. اختر المنتج" data-en="1. Choose Product">١. اختر المنتج</h5>
+            <p data-ar="تصفح مجموعتنا المميزة واختر المنتج الذي يناسبك" data-en="Browse our collection and choose the product that suits you.">تصفح مجموعتنا المميزة واختر المنتج الذي يناسبك</p>
+          </div>
+        </div>
+        <div class="col-md-4 anim" style="transition-delay:.1s">
+          <div class="step-card">
+            <div class="step-icon" data-num="2">💬</div>
+            <h5 data-ar="٢. أرسل التفاصيل عبر واتساب" data-en="2. Send Details via WhatsApp">٢. أرسل التفاصيل عبر واتساب</h5>
+            <p data-ar="أرسل اسمك، اللون المفضل والكمية وأي تفاصيل تخصيص" data-en="Send your name, preferred color, quantity and any customization details.">أرسل اسمك، اللون المفضل والكمية وأي تفاصيل تخصيص</p>
+          </div>
+        </div>
+        <div class="col-md-4 anim" style="transition-delay:.2s">
+          <div class="step-card">
+            <div class="step-icon" data-num="3">📦</div>
+            <h5 data-ar="٣. يتم التنفيذ والتوصيل" data-en="3. Production & Delivery">٣. يتم التنفيذ والتوصيل</h5>
+            <p data-ar="نُنجز تصميمك بدقة عالية ونوصله إلى بابك" data-en="We complete your design with high precision and deliver it to your door.">نُنجز تصميمك بدقة عالية ونوصله إلى بابك</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="section-pad bg-alt">
+    <div class="container">
+      <div class="section-label anim"><span data-ar="آراء العملاء" data-en="Customer Reviews">آراء العملاء</span></div>
+      <h2 class="section-title anim" data-ar="ماذا يقول <span class='gold'>عملاؤنا</span>" data-en="What Our <span class='gold'>Clients</span> Say">ماذا يقول <span class="gold">عملاؤنا</span></h2>
+      <div class="gold-line mb-5 anim"></div>
+      <div class="row g-4" id="reviewsGrid"></div>
+    </div>
+  </section>
+
+  <!-- CUSTOM ORDER CTA -->
+  <section class="custom-order-section">
+    <div class="container anim">
+      <div class="section-label justify-content-center"><span data-ar="تصميم خاص بك" data-en="Your Custom Design">تصميم خاص بك</span></div>
+      <h2 class="section-title mb-3" data-ar="عندك <span class='gold'>فكرة مميزة؟</span>" data-en="Have a <span class='gold'>Unique Idea?</span>">عندك <span class="gold">فكرة مميزة؟</span></h2>
+      <p class="section-desc" data-ar="نحن نحول أفكارك إلى حقيقة ملموسة — أي تصميم، أي اسم، أي مناسبة" data-en="We turn your ideas into tangible reality — any design, any name, any occasion.">نحن نحول أفكارك إلى حقيقة ملموسة — أي تصميم، أي اسم، أي مناسبة</p>
+      <a href="https://wa.me/201098517116?text=مرحباً،%20أريد%20تصميم%20خاص%20وأرغب%20بالتواصل%20معكم." target="_blank" class="btn-gold" data-ar="💬 اطلب تصميم خاص" data-en="💬 Request Custom Design">💬 اطلب تصميم خاص</a>
+    </div>
+  </section>
+
+  <!-- COUNTDOWN -->
+  <section class="countdown-section">
+    <div class="container">
+      <div class="anim">
+        <div class="section-label justify-content-center"><span data-ar="عرض محدود الوقت" data-en="Limited Time Offer">عرض محدود الوقت</span></div>
+        <h3 class="section-title mb-2" style="font-size:1.8rem;" data-ar="اطلب فانوسك قبل <span class='gold'>نفاد الكمية!</span>" data-en="Order Your Lantern Before <span class='gold'>Stock Runs Out!</span>">اطلب فانوسك قبل <span class="gold">نفاد الكمية!</span></h3>
+        <p class="section-desc mb-4" data-ar="عروض رمضان المميزة — فوانيس مخصصة بأسعار لا تُفوَّت" data-en="Special Ramadan offers — custom lanterns at unmissable prices.">عروض رمضان المميزة — فوانيس مخصصة بأسعار لا تُفوَّت</p>
+        <div class="countdown-wrap">
+          <div class="cd-box"><div class="cd-num" id="cd-days">07</div><div class="cd-lbl" data-ar="يوم" data-en="Days">يوم</div></div>
+          <div class="cd-box"><div class="cd-num" id="cd-hours">12</div><div class="cd-lbl" data-ar="ساعة" data-en="Hours">ساعة</div></div>
+          <div class="cd-box"><div class="cd-num" id="cd-mins">34</div><div class="cd-lbl" data-ar="دقيقة" data-en="Minutes">دقيقة</div></div>
+          <div class="cd-box"><div class="cd-num" id="cd-secs">59</div><div class="cd-lbl" data-ar="ثانية" data-en="Seconds">ثانية</div></div>
+        </div>
+        <div class="mt-4">
+          <a href="https://wa.me/201098517116?text=مرحباً،%20أريد%20طلب%20فانوس%20رمضان%20مخصص%20قبل%20نفاد%20الكمية." target="_blank" class="btn-gold" data-ar="احجز طلبك الآن 🏮" data-en="Book Your Order Now 🏮">احجز طلبك الآن 🏮</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /home page -->
+
+<!-- ══════════════════════════════════════════════
+     SHOP PAGE
+══════════════════════════════════════════════ -->
+<div id="page-shop" class="page">
+  <div class="page-hero">
+    <div class="eyebrow" data-ar="✦ مجموعتنا الكاملة ✦" data-en="✦ Our Full Collection ✦">✦ مجموعتنا الكاملة ✦</div>
+    <h1 data-ar="المتجر" data-en="Shop">المتجر</h1>
+    <p data-ar="كل منتج مصنوع بيد الفن وحسب طلبك الشخصي" data-en="Every product is crafted with artisan care and personalized to your order.">كل منتج مصنوع بيد الفن وحسب طلبك الشخصي</p>
+  </div>
+  <section class="section-pad bg-dark">
+    <div class="container">
+      <div class="row g-4" id="allProductsGrid"></div>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     GALLERY PAGE
+══════════════════════════════════════════════ -->
+<div id="page-gallery" class="page">
+  <div class="page-hero">
+    <div class="eyebrow" data-ar="✦ أعمالنا ✦" data-en="✦ Our Works ✦">✦ أعمالنا ✦</div>
+    <h1 data-ar="معرض الأعمال" data-en="Gallery">معرض الأعمال</h1>
+    <p data-ar="لمسة من فن الليزر في كل صورة" data-en="A touch of laser art in every image.">لمسة من فن الليزر في كل صورة</p>
+  </div>
+  <section class="section-pad bg-dark">
+    <div class="container">
+      <div class="row g-2" id="galleryGrid"></div>
+    </div>
+  </section>
+</div>
+
+<!-- Lightbox -->
+<div id="lightbox">
+  <button class="lb-close" onclick="closeLightbox()"><i class="bi bi-x-lg"></i></button>
+  <button class="lb-prev" onclick="lbNav(-1)"><i class="bi bi-chevron-right"></i></button>
+  <img id="lbImg" src="" alt="Gallery"/>
+  <button class="lb-next" onclick="lbNav(1)"><i class="bi bi-chevron-left"></i></button>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     ABOUT PAGE
+══════════════════════════════════════════════ -->
+<div id="page-about" class="page">
+  <div class="page-hero">
+    <div class="eyebrow" data-ar="✦ قصتنا ✦" data-en="✦ Our Story ✦">✦ قصتنا ✦</div>
+    <h1 data-ar="من نحن" data-en="About Us">من نحن</h1>
+    <p data-ar="شغف بالفن والتصميم في كل قطعة نصنعها" data-en="Passion for art and design in every piece we create.">شغف بالفن والتصميم في كل قطعة نصنعها</p>
+  </div>
+  <section class="section-pad bg-dark">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-5 anim anim-left">
+          <div class="about-visual">
+            <!-- ABOUT IMAGE: Replace emoji with <img> tag if desired -->
+            <img src="WhatsApp Image 2026-03-05 at 10.30.00 PM.jpeg" alt="About Laser Shop" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;"/>
+          </div>
+        </div>
+        <div class="col-lg-7 anim anim-right">
+          <div class="section-label"><span data-ar="القصة" data-en="The Story">القصة</span></div>
+          <h2 style="font-family:var(--font-ar);font-size:2rem;font-weight:800;margin-bottom:20px;" data-ar="شغفنا بـ <span class='gold'>فن الليزر</span>" data-en="Our Passion for <span class='gold'>Laser Art</span>">شغفنا بـ <span class="gold">فن الليزر</span></h2>
+          <p style="font-size:0.9rem;color:var(--white-dim);line-height:1.9;margin-bottom:16px;" data-ar="وُلدت فكرة Laser Shop من شغف حقيقي بالتصميم والحِرفة اليدوية. بدأنا رحلتنا بحلم بسيط: أن نجعل كل هدية تحمل روحًا ومعنى." data-en="The idea of Laser Shop was born from a genuine passion for design and handcraft. We started our journey with a simple dream: to make every gift carry a soul and meaning.">وُلدت فكرة Laser Shop من شغف حقيقي بالتصميم والحِرفة اليدوية. بدأنا رحلتنا بحلم بسيط: أن نجعل كل هدية تحمل روحًا ومعنى.</p>
+          <p style="font-size:0.9rem;color:var(--white-dim);line-height:1.9;margin-bottom:24px;" data-ar="اليوم، بفضل ثقة مئات العملاء، أصبحنا من أبرز محلات الليزر والطباعة المخصصة في الإسكندرية، نقدم منتجات تجمع بين الأصالة الإسلامية والتصميم العصري." data-en="Today, thanks to the trust of hundreds of clients, we have become one of the leading laser and custom printing shops in Alexandria, offering products that blend Islamic heritage with modern design.">اليوم، بفضل ثقة مئات العملاء، أصبحنا من أبرز محلات الليزر والطباعة المخصصة في الإسكندرية، نقدم منتجات تجمع بين الأصالة الإسلامية والتصميم العصري.</p>
+          <div class="vision-box">
+            <h6 data-ar="رؤيتنا" data-en="Our Vision">رؤيتنا</h6>
+            <p data-ar="أن نكون الوجهة الأولى في مصر للهدايا الشخصية والفن بالليزر." data-en="To be Egypt's first destination for personalized gifts and laser art.">أن نكون الوجهة الأولى في مصر للهدايا الشخصية والفن بالليزر.</p>
+          </div>
+          <div class="vision-box">
+            <h6 data-ar="مهمتنا" data-en="Our Mission">مهمتنا</h6>
+            <p data-ar="نحول أفكارك إلى قطع فنية تدوم لسنوات، بأيدي متخصصة وتكنولوجيا دقيقة." data-en="We transform your ideas into art pieces that last for years, with skilled hands and precise technology.">نحول أفكارك إلى قطع فنية تدوم لسنوات، بأيدي متخصصة وتكنولوجيا دقيقة.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     FAQ PAGE
+══════════════════════════════════════════════ -->
+<div id="page-faq" class="page">
+  <div class="page-hero">
+    <div class="eyebrow" data-ar="✦ استفساراتك ✦" data-en="✦ Your Questions ✦">✦ استفساراتك ✦</div>
+    <h1 data-ar="الأسئلة الشائعة" data-en="FAQ">الأسئلة الشائعة</h1>
+    <p data-ar="إجابات على أكثر الأسئلة شيوعًا من عملائنا" data-en="Answers to the most common questions from our clients.">إجابات على أكثر الأسئلة شيوعًا من عملائنا</p>
+  </div>
+  <section class="section-pad bg-dark">
+    <div class="container" style="max-width:780px;">
+      <div id="faqContainer"></div>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     FIND US PAGE
+══════════════════════════════════════════════ -->
+<div id="page-findus" class="page">
+  <div class="page-hero">
+    <div class="eyebrow" data-ar="✦ نحن في الإسكندرية ✦" data-en="✦ We're in Alexandria ✦">✦ نحن في الإسكندرية ✦</div>
+    <h1 data-ar="موقعنا" data-en="Find Us">موقعنا</h1>
+    <p data-ar="تفضل بزيارتنا أو تواصل معنا عبر واتساب" data-en="Visit us or contact us via WhatsApp.">تفضل بزيارتنا أو تواصل معنا عبر واتساب</p>
+  </div>
+  <section class="section-pad bg-dark">
+    <div class="container">
+      <div class="row g-5">
+        <div class="col-lg-5 anim">
+          <div class="section-label"><span data-ar="تواصل معنا" data-en="Contact Us">تواصل معنا</span></div>
+          <h3 style="font-family:var(--font-ar);font-weight:800;font-size:1.6rem;margin-bottom:30px;" data-ar="نحن هنا <span class='gold'>لخدمتك</span>" data-en="We're Here <span class='gold'>For You</span>">نحن هنا <span class="gold">لخدمتك</span></h3>
+          <div class="contact-item">
+            <div class="contact-icon-wrap"><i class="bi bi-geo-alt-fill"></i></div>
+            <div>
+              <div class="contact-lbl" data-ar="العنوان" data-en="Address">العنوان</div>
+              <div class="contact-val" data-ar="الإسكندرية، مصر" data-en="Alexandria, Egypt">الإسكندرية، مصر</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon-wrap"><i class="bi bi-telephone-fill"></i></div>
+            <div>
+              <div class="contact-lbl" data-ar="الهاتف / واتساب" data-en="Phone / WhatsApp">الهاتف / واتساب</div>
+              <div class="contact-val"><a href="tel:+201098517116" style="color:var(--white-dim);text-decoration:none;">+20 10 98517116</a></div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon-wrap"><i class="bi bi-clock-fill"></i></div>
+            <div>
+              <div class="contact-lbl" data-ar="ساعات العمل" data-en="Working Hours">ساعات العمل</div>
+              <div class="contact-val" data-ar="السبت – الخميس<br/>١٠ صباحًا – ١٠ مساءً" data-en="Saturday – Thursday<br/>10 AM – 10 PM">السبت – الخميس<br/>١٠ صباحًا – ١٠ مساءً</div>
+            </div>
+          </div>
+          <div class="contact-item" style="border:none">
+            <div class="contact-icon-wrap"><i class="bi bi-facebook"></i></div>
+            <div>
+              <div class="contact-lbl">Facebook</div>
+              <div class="contact-val d-flex flex-column gap-2 mt-1">
+                <a href="https://www.facebook.com/profile.php?id=61565406414783" target="_blank" style="color:var(--gold);font-size:0.82rem;text-decoration:none;">صفحة المتجر الأولى ↗</a>
+                <a href="https://www.facebook.com/profile.php?id=100064812308117" target="_blank" style="color:var(--gold);font-size:0.82rem;text-decoration:none;">صفحة المتجر الثانية ↗</a>
+              </div>
+            </div>
+          </div>
+          <div class="mt-3">
+            <a href="https://wa.me/201098517116" target="_blank" class="btn-gold w-100 justify-content-center" data-ar="💬 تواصل عبر واتساب" data-en="💬 Chat on WhatsApp">💬 تواصل عبر واتساب</a>
+          </div>
+        </div>
+        <div class="col-lg-7 anim anim-right">
+          <div class="map-container">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d110503.34!2d29.8845!3d31.2001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14f5c49126651ea3%3A0x92a5f9f2c23e0536!2sAlexandria%2C%20Egypt!5e0!3m2!1sen!2seg"
+              allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     FOOTER (always visible)
+══════════════════════════════════════════════ -->
+<footer>
+  <div class="footer-top">
+    <div class="container">
+      <div class="row g-5">
+        <div class="col-lg-4">
+          <div class="footer-brand">✦ LASER SHOP</div>
+          <p class="footer-brand-desc" data-ar="فن الليزر والهدايا المخصصة في الإسكندرية — كل قطعة تحكي قصة" data-en="Laser art and custom gifts in Alexandria — every piece tells a story.">فن الليزر والهدايا المخصصة في الإسكندرية — كل قطعة تحكي قصة</p>
+          <div class="footer-social mt-3">
+            <a href="https://www.facebook.com/profile.php?id=61565406414783" target="_blank" class="social-link"><i class="bi bi-facebook"></i></a>
+            <a href="https://www.facebook.com/profile.php?id=100064812308117" target="_blank" class="social-link"><i class="bi bi-facebook"></i></a>
+            <a href="https://wa.me/201098517116" target="_blank" class="social-link"><i class="bi bi-whatsapp"></i></a>
+          </div>
+        </div>
+        <div class="col-6 col-lg-2">
+          <div class="footer-heading" data-ar="روابط سريعة" data-en="Quick Links">روابط سريعة</div>
+          <ul class="footer-links">
+            <li><a href="#" onclick="showPage('home');return false;" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
+            <li><a href="#" onclick="showPage('shop');return false;" data-ar="المتجر" data-en="Shop">المتجر</a></li>
+            <li><a href="#" onclick="showPage('gallery');return false;" data-ar="المعرض" data-en="Gallery">المعرض</a></li>
+            <li><a href="#" onclick="showPage('about');return false;" data-ar="من نحن" data-en="About">من نحن</a></li>
+            <li><a href="#" onclick="showPage('faq');return false;" data-ar="الأسئلة الشائعة" data-en="FAQ">الأسئلة الشائعة</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-lg-3">
+          <div class="footer-heading" data-ar="تواصل معنا" data-en="Contact">تواصل معنا</div>
+          <ul class="footer-links">
+            <li><a href="tel:+201098517116">+20 10 98517116</a></li>
+            <li><a href="https://wa.me/201098517116" target="_blank" data-ar="واتساب" data-en="WhatsApp">واتساب</a></li>
+            <li><a href="#" data-ar="الإسكندرية، مصر" data-en="Alexandria, Egypt">الإسكندرية، مصر</a></li>
+            <li><a href="#" data-ar="السبت – الخميس" data-en="Sat – Thu">السبت – الخميس</a></li>
+            <li><a href="#" data-ar="١٠ ص – ١٠ م" data-en="10AM – 10PM">١٠ ص – ١٠ م</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-3">
+          <div class="footer-heading" data-ar="أرسل طلبك" data-en="Send Your Order">أرسل طلبك</div>
+          <p style="font-size:0.78rem;color:var(--muted);line-height:1.7;margin-bottom:14px;" data-ar="للطلب والاستفسار تواصل معنا مباشرة عبر واتساب" data-en="For orders and inquiries, contact us directly via WhatsApp.">للطلب والاستفسار تواصل معنا مباشرة عبر واتساب</p>
+          <a href="https://wa.me/201098517116" target="_blank" class="btn-gold w-100 justify-content-center" style="clip-path:none;" data-ar="💬 واتساب" data-en="💬 WhatsApp">💬 واتساب</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="footer-bottom">
+      <p>© 2025 <span class="gold">Laser Shop</span>. <span data-ar="جميع الحقوق محفوظة" data-en="All rights reserved.">جميع الحقوق محفوظة</span></p>
+      <div class="handmade-badge" data-ar="❤️ صُنع بحب في الإسكندرية" data-en="❤️ Handmade with Love in Alexandria">❤️ صُنع بحب في الإسكندرية</div>
+      <p data-ar="تطوير: <span class='gold'><a href='pages/admin.html' target='_blank' style='color:inherit;text-decoration:none;'>NourAmr</a></span>" data-en="Developed by: <span class='gold'><a href='pages/admin.html' target='_blank' style='color:inherit;text-decoration:none;'>NourAmr</a></span>">تطوير: <span class="gold"><a href="pages/admin.html" target="_blank" style="color:inherit;text-decoration:none;">NourAmr</a></span></p>
+    </div>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════════════════════
+     ORDER MODAL
+══════════════════════════════════════════════ -->
+<div class="modal fade" id="orderModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalProductTitle">اطلب المنتج</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label class="form-label" data-ar="🖊 الاسم المطلوب طباعته / نقشه" data-en="🖊 Name to Print / Engrave">🖊 الاسم المطلوب طباعته / نقشه</label>
+          <input type="text" class="form-control" id="orderName" placeholder="مثال: أحمد" dir="auto"/>
+        </div>
+        <div class="mb-3">
+          <label class="form-label" data-ar="🎨 اللون المفضل (اختياري)" data-en="🎨 Preferred Color (optional)">🎨 اللون المفضل (اختياري)</label>
+          <select class="form-select" id="orderColor">
+            <option value="" data-ar="اختر اللون..." data-en="Choose color...">اختر اللون...</option>
+            <option data-ar="ذهبي" data-en="Gold">ذهبي</option>
+            <option data-ar="أسود" data-en="Black">أسود</option>
+            <option data-ar="خشبي طبيعي" data-en="Natural Wood">خشبي طبيعي</option>
+            <option data-ar="أبيض" data-en="White">أبيض</option>
+            <option data-ar="حسب الطلب" data-en="Custom">حسب الطلب</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label" data-ar="🔢 الكمية" data-en="🔢 Quantity">🔢 الكمية</label>
+          <input type="number" class="form-control" id="orderQty" value="1" min="1"/>
+        </div>
+        <div class="mb-0">
+          <label class="form-label" data-ar="📝 ملاحظات إضافية (اختياري)" data-en="📝 Additional Notes (optional)">📝 ملاحظات إضافية (اختياري)</label>
+          <textarea class="form-control" id="orderNotes" rows="2" placeholder="أي تفاصيل إضافية..."></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-outline-gold" data-bs-dismiss="modal" data-ar="إلغاء" data-en="Cancel">إلغاء</button>
+        <button type="button" class="btn-gold" onclick="submitOrder()" data-ar="📲 إرسال عبر واتساب" data-en="📲 Send via WhatsApp">📲 إرسال عبر واتساب</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Firebase SDK (loaded globally for use in main script) -->
+<script type="module">
+/* ══════════════════════════════════════════════
+   FIREBASE INTEGRATION
+   Products load from Firestore in real-time.
+   If Firebase is not configured yet, fallback
+   to the local hardcoded products array.
+══════════════════════════════════════════════ */
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, query, orderBy, onSnapshot }
+  from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey:            "AIzaSyA1--JbOZPzEtO62-Dtok4ufI-0M4z55yg",
+  authDomain:        "lasershop-c62f1.firebaseapp.com",
+  projectId:         "lasershop-c62f1",
+  storageBucket:     "lasershop-c62f1.firebasestorage.app",
+  messagingSenderId: "893934150463",
+  appId:             "1:893934150463:web:42bd572385e7577b36a98a"
+};
+
+let firebaseEnabled = firebaseConfig.apiKey !== "YOUR_API_KEY";
+
+if (firebaseEnabled) {
+  try {
+    const fbApp = initializeApp(firebaseConfig);
+    const fbDb  = getFirestore(fbApp);
+    const q     = query(collection(fbDb, "products"), orderBy("createdAt", "desc"));
+
+    // Real-time listener — updates UI instantly when admin adds/edits/deletes
+    onSnapshot(q, snap => {
+      const fbProducts = snap.docs.map(d => {
+        const data = d.data();
+        return {
+          id: d.id,
+          nameAr: data.nameAr || "",
+          nameEn: data.nameEn || "",
+          descAr: data.descAr || "",
+          descEn: data.descEn || "",
+          img: data.imageUrl || "",
+          badge: data.badge || "",
+          isBestSeller: data.isBestSeller || false,
+          isFeatured: data.isFeatured || false,
+          // Convert badge string to badges array for compatibility
+          badges: buildBadges(data.badge, data.isBestSeller)
+        };
+      });
+
+      // Merge with fallback — if Firebase has products, use those; otherwise keep local
+      if (fbProducts.length > 0) {
+        products.length = 0;
+        fbProducts.forEach(p => products.push(p));
+      }
+
+      // Re-render all grids
+      renderAll();
+    }, err => {
+      console.warn("Firebase products load error:", err.message);
+      // Silently fall back to local products
+    });
+  } catch(e) {
+    console.warn("Firebase init error:", e.message);
+  }
+}
+
+function buildBadges(badge, isBestSeller) {
+  const map = {
+    bestseller: [{type:"gold", ar:"🔥 الأكثر مبيعًا", en:"🔥 Best Seller"}],
+    new:        [{type:"new",  ar:"✨ جديد", en:"✨ New"}],
+    exclusive:  [{type:"purple", ar:"💜 تصميم حصري", en:"💜 Exclusive Design"}]
+  };
+  const result = map[badge] || [];
+  if (isBestSeller && badge !== "bestseller") {
+    result.unshift({type:"gold", ar:"🔥 الأكثر مبيعًا", en:"🔥 Best Seller"});
+  }
+  return result;
+}
+</script>
+
+<script>
+/* ══════════════════════════════════════════════
+   LOCAL FALLBACK DATA
+   (used when Firebase is not yet configured)
+══════════════════════════════════════════════ */
+const products = [
+  {
+    id: 1,
+    nameAr: "إطار صورة دائري مخصص مع التاريخ",
+    nameEn: "Custom Circular Photo Frame with Date",
+    descAr: "إطار خشبي دائري مقطوع بالليزر لصورة عائلية مع نقش التاريخ والاسم — هدية مميزة لكل المناسبات",
+    descEn: "Laser-cut circular wooden frame for family photos with engraved date and name — a perfect gift for all occasions.",
+    img: "469702406_1019249979962298_945561077549864196_n.jpg",
+    badges: [{type:"gold", ar:"🔥 الأكثر مبيعًا", en:"🔥 Best Seller"}],
+    isBestSeller: true,
+    isFeatured: true
+  },
+  {
+    id: 2,
+    nameAr: "لافتة نيون مضيئة بالاسم",
+    nameEn: "Custom Neon LED Name Sign",
+    descAr: "لافتة نيون مضيئة بأسلوب عصري أنيق — مثالية لغرف النوم والمحلات والمناسبات الخاصة",
+    descEn: "Modern elegant neon light sign — perfect for bedrooms, shops, and special occasions.",
+    img: "469965793_1019236333296996_1561835039651207852_n.jpg",
+    badges: [{type:"purple", ar:"💜 تصميم حصري", en:"💜 Exclusive Design"},{type:"new", ar:"✨ جديد", en:"✨ New"}],
+    isBestSeller: false,
+    isFeatured: true
+  },
+  {
+    id: 3,
+    nameAr: "رحل قرآن خشبي بزخارف إسلامية",
+    nameEn: "Wooden Quran Stand with Islamic Patterns",
+    descAr: "رحل قرآن كريم مصنوع من الخشب الطبيعي بزخارف إسلامية هندسية مقطوعة بالليزر — تحفة فنية روحانية",
+    descEn: "Quran stand made from natural wood with laser-cut Islamic geometric patterns — a spiritual work of art.",
+    img: "481012708_1064125625757838_278164928621277824_n.jpg",
+    badges: [{type:"gold", ar:"🔥 الأكثر مبيعًا", en:"🔥 Best Seller"}],
+    isBestSeller: true,
+    isFeatured: true
+  },
+  {
+    id: 4,
+    nameAr: "مج مطبوع بالاسم والخط العربي",
+    nameEn: "Custom Arabic Calligraphy Name Mug",
+    descAr: "مج سيراميك عالي الجودة مطبوع بالاسم بخط عربي أنيق مع لمسات زخرفية مميزة — هدية مثالية",
+    descEn: "High-quality ceramic mug printed with elegant Arabic calligraphy name and decorative touches — a perfect gift.",
+    img: "481260125_1065775378926196_1960915739665130992_n.jpg",
+    badges: [{type:"gold", ar:"🔥 الأكثر مبيعًا", en:"🔥 Best Seller"}],
+    isBestSeller: true,
+    isFeatured: true
+  },
+  {
+    id: 5,
+    nameAr: "سيت نوت بوك + مج + كوستر مطبوع",
+    nameEn: "Printed Notebook + Mug + Coaster Set",
+    descAr: "طقم كامل مطبوع بتصميم موحد — نوت بوك بغلاف مطبوع أمامي وخلفي، مج، وكوستر مع الاسم والتصميم المفضل",
+    descEn: "A complete matching set — notebook with printed front & back cover, mug, and coaster with your name and favorite design.",
+    img: "486633578_1087512793419121_6997780450853854243_n.jpg",
+    badges: [{type:"purple", ar:"💜 طقم كامل", en:"💜 Full Set"},{type:"new", ar:"✨ جديد", en:"✨ New"}],
+    isBestSeller: false,
+    isFeatured: false
+  },
+  {
+    id: 6,
+    nameAr: "ركن صلاة خشبي بزخارف إسلامية",
+    nameEn: "Wooden Islamic Prayer Corner Decoration",
+    descAr: "لوحة خشبية فاخرة بتصميم محراب إسلامي مع زخارف هندسية مقطوعة بالليزر — تزيين روحاني لمساحة الصلاة",
+    descEn: "Luxury wooden panel with Islamic mihrab design and laser-cut geometric patterns — spiritual decoration for prayer spaces.",
+    img: "487453981_1089410563229344_5861305970087127620_n.jpg",
+    badges: [{type:"gold", ar:"🔥 الأكثر مبيعًا", en:"🔥 Best Seller"},{type:"purple", ar:"💜 تصميم حصري", en:"💜 Exclusive"}],
+    isBestSeller: true,
+    isFeatured: true
+  },
+  {
+    id: 7,
+    nameAr: "حصالة خشب مطبوعة مع لوحة ادخار مخصصة",
+    nameEn: "Printed Wooden Money Box with Savings Chart",
+    descAr: "حصالة خشبية ترند مطبوعة بصورة وتصميم مخصص، مع لوحة ادخار بالاسم وأرقام مميزة — هدية عملية وجميلة",
+    descEn: "Trending printed wooden money box with custom photo and design, plus a personalized savings chart — a practical and beautiful gift.",
+    img: "487477162_1089405826563151_962882680886815087_n.jpg",
+    badges: [{type:"new", ar:"✨ ترند", en:"✨ Trending"}],
+    isBestSeller: false,
+    isFeatured: false
+  },
+  {
+    id: 8,
+    nameAr: "طقم رمضاني فاخر (رحل + فوانيس + شمعدان)",
+    nameEn: "Luxury Ramadan Set (Stand + Lanterns + Candle Holder)",
+    descAr: "طقم رمضاني فاخر كامل يشمل رحل قرآن ذهبي وأسود، فوانيس مزخرفة، وشمعدان بتصميم إسلامي راقٍ",
+    descEn: "A complete luxury Ramadan set including a gold & black Quran stand, decorated lanterns, and an elegant Islamic-design candle holder.",
+    img: "488038154_1089464779890589_6401524738330593693_n.jpg",
+    badges: [{type:"gold", ar:"🔥 الأكثر مبيعًا", en:"🔥 Best Seller"},{type:"purple", ar:"💜 طقم فاخر", en:"💜 Luxury Set"}],
+    isBestSeller: true,
+    isFeatured: true
+  }
+];
+
+const reviews = [
+  { nameAr:"فاطمة الزهراء", nameEn:"Fatima Al-Zahraa", locAr:"القاهرة", locEn:"Cairo", textAr:"أجمل هدية اشتريتها في حياتي! الجودة لا توصف والتنفيذ كان أسرع مما توقعت. شكراً Laser Shop ❤️", textEn:"The most beautiful gift I've ever bought! The quality is indescribable and the execution was faster than I expected. Thank you Laser Shop ❤️", initial:"ف" },
+  { nameAr:"محمد حسام", nameEn:"Mohamed Hossam", locAr:"الإسكندرية", locEn:"Alexandria", textAr:"طلبت ركن صلاة لأمي وكانت مبهوتة لما شافته! الزخارف الإسلامية تحفة فنية حقيقية. أنصح الجميع بالتعامل معهم.", textEn:"I ordered a prayer corner for my mother and she was amazed when she saw it! The Islamic patterns are a true work of art. I recommend everyone to deal with them.", initial:"م" },
+  { nameAr:"سارة إبراهيم", nameEn:"Sara Ibrahim", locAr:"الإسكندرية", locEn:"Alexandria", textAr:"السيت ديال النوت بوك والمج والكوستر جاء تحفة! كل التفاصيل مظبوطة 100% وهدية منهم لطفلتي هتفضل ذكرى دايمة.", textEn:"The notebook, mug, and coaster set was amazing! Every detail was 100% correct and the gift for my daughter will remain a lasting memory.", initial:"س" }
+];
+
+const faqData = [
+  { qAr:"هل يمكن تخصيص الاسم على أي منتج؟", qEn:"Can I customize the name on any product?", aAr:"نعم! جميع منتجاتنا قابلة للتخصيص بالاسم والتاريخ والرسائل المطلوبة. فقط أرسل التفاصيل عبر واتساب.", aEn:"Yes! All our products can be customized with name, date, and desired messages. Just send details via WhatsApp." },
+  { qAr:"كم تستغرق مدة التنفيذ؟", qEn:"How long does production take?", aAr:"معظم الطلبات تُنجز خلال 2-4 أيام عمل. للطلبات العاجلة تواصل معنا مباشرة.", aEn:"Most orders are completed within 2-4 working days. For urgent orders, contact us directly." },
+  { qAr:"هل يوجد شحن خارج الإسكندرية؟", qEn:"Do you ship outside Alexandria?", aAr:"نعم! نشحن لجميع محافظات مصر عبر شركات الشحن المعتمدة مع خيارات التوصيل السريع.", aEn:"Yes! We ship to all Egyptian governorates via certified shipping companies with express delivery options." },
+  { qAr:"ما هي طرق الدفع المتاحة؟", qEn:"What payment methods are available?", aAr:"نقبل الدفع عند الاستلام (داخل الإسكندرية)، والتحويل البنكي، وInstaPay لباقي المحافظات.", aEn:"We accept cash on delivery (within Alexandria), bank transfer, and InstaPay for other governorates." },
+  { qAr:"هل يمكن طلب كميات كبيرة للشركات؟", qEn:"Can I order large quantities for corporate clients?", aAr:"بالطبع! نقدم عروض خاصة للطلبات الكبيرة والشركات. تواصل معنا للحصول على عرض سعر مخصص.", aEn:"Of course! We offer special rates for bulk orders and corporate clients. Contact us for a custom quote." }
+];
+
+/* ══════════════════════════════════════════════
+   LANGUAGE
+══════════════════════════════════════════════ */
+let currentLang = 'ar';
+
+function toggleLang() {
+  currentLang = currentLang === 'ar' ? 'en' : 'ar';
+  const html = document.documentElement;
+  const body = document.body;
+  const btn = document.getElementById('langBtn');
+
+  if (currentLang === 'en') {
+    html.setAttribute('lang', 'en');
+    html.setAttribute('dir', 'ltr');
+    body.classList.add('lang-en');
+    btn.textContent = 'عر';
+  } else {
+    html.setAttribute('lang', 'ar');
+    html.setAttribute('dir', 'rtl');
+    body.classList.remove('lang-en');
+    btn.textContent = 'EN';
+  }
+
+  // Update all data-ar/data-en elements
+  document.querySelectorAll('[data-ar]').forEach(el => {
+    const val = el.getAttribute('data-' + currentLang);
+    if (val) el.innerHTML = val;
+  });
+
+  // Re-render dynamic content
+  renderAll();
+}
+
+function t(el, arKey, enKey) {
+  return currentLang === 'ar' ? el[arKey] : el[enKey];
+}
+
+/* ══════════════════════════════════════════════
+   RENDER PRODUCTS
+══════════════════════════════════════════════ */
+function createProductCard(p, delay = 0) {
+  const badges = (p.badges || []).map(b => {
+    const cls = b.type === 'gold' ? 'badge-gold' : b.type === 'purple' ? 'badge-purple' : 'badge-new';
+    return `<span class="${cls}">${currentLang === 'ar' ? b.ar : b.en}</span>`;
+  }).join('');
+
+  const name = currentLang === 'ar' ? p.nameAr : p.nameEn;
+  const desc = currentLang === 'ar' ? p.descAr : p.descEn;
+  const orderBtn = currentLang === 'ar' ? '🛒 اطلب الآن' : '🛒 Order Now';
+  const quoteBtn = currentLang === 'ar' ? '💰 احصل على عرض سعر' : '💰 Get a Quote';
+
+  // Support both local `img` field and Firebase `imageUrl` field
+  const imgSrc = p.img || p.imageUrl || '';
+  const imgHtml = imgSrc
+    ? `<img src="${imgSrc}" alt="${name}" loading="lazy"/>`
+    : `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3rem;background:#111;">🎁</div>`;
+
+  return `
+    <div class="col-sm-6 col-lg-4 anim" style="transition-delay:${delay}s">
+      <div class="product-card">
+        ${p.isBestSeller ? `<div class="bestseller-ribbon">${currentLang === 'ar' ? '🔥 الأكثر مبيعًا' : '🔥 Best Seller'}</div>` : ''}
+        <div class="product-img-wrap">
+          ${imgHtml}
+          <div class="product-img-overlay"></div>
+          <div class="product-badges">${badges}</div>
+        </div>
+        <div class="product-body">
+          <h5 class="product-title">${name}</h5>
+          <p class="product-desc">${desc}</p>
+          <div class="product-price">
+            <small>${currentLang === 'ar' ? 'السعر' : 'Price'}</small>
+            ${currentLang === 'ar' ? 'تواصل للسعر' : 'Contact for Price'}
+          </div>
+          <div class="product-btns">
+            <button class="btn-order-now" onclick="openOrderModal('${(name||'').replace(/'/g,"\\'")}')">
+              <i class="bi bi-whatsapp"></i> ${orderBtn}
+            </button>
+            <a href="https://wa.me/201098517116?text=${encodeURIComponent((currentLang === 'ar' ? 'مرحباً، أريد الاستفسار عن سعر: ' : 'Hello, I would like to inquire about the price of: ') + (name||''))}" target="_blank" class="btn-quote">
+              ${quoteBtn}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>`;
+}
+
+function renderFeatured() {
+  const grid = document.getElementById('featuredGrid');
+  if (!grid) return;
+  const featured = products.filter(p => p.isFeatured).slice(0, 6);
+  grid.innerHTML = featured.map((p, i) => createProductCard(p, i * 0.07)).join('');
+  initAnimObserver();
+}
+
+function renderBestSellers() {
+  const grid = document.getElementById('bestSellersGrid');
+  if (!grid) return;
+  const bs = products.filter(p => p.isBestSeller);
+  grid.innerHTML = bs.map((p, i) => createProductCard(p, i * 0.07)).join('');
+  initAnimObserver();
+}
+
+function renderAllProducts() {
+  const grid = document.getElementById('allProductsGrid');
+  if (!grid) return;
+  grid.innerHTML = products.map((p, i) => createProductCard(p, i * 0.05)).join('');
+  initAnimObserver();
+}
+
+function renderGallery() {
+  const grid = document.getElementById('galleryGrid');
+  if (!grid) return;
+  const lbImagesList = products.map(p => p.img || p.imageUrl || '').filter(Boolean);
+  // Update lightbox images
+  lbImages.length = 0;
+  lbImagesList.forEach(i => lbImages.push(i));
+
+  grid.innerHTML = lbImagesList.map((img, i) => `
+    <div class="col-6 col-md-4 col-lg-3">
+      <div class="gallery-item anim" onclick="openLightbox(${i})" style="transition-delay:${i*0.05}s">
+        <img src="${img}" alt="Gallery ${i+1}" loading="lazy"/>
+        <div class="gallery-item-overlay"><i class="bi bi-zoom-in"></i></div>
+      </div>
+    </div>`).join('');
+  initAnimObserver();
+}
+
+function renderReviews() {
+  const grid = document.getElementById('reviewsGrid');
+  if (!grid) return;
+  grid.innerHTML = reviews.map((r, i) => `
+    <div class="col-md-4 anim" style="transition-delay:${i*0.1}s">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-quote">"</div>
+        <p class="review-text">${currentLang === 'ar' ? r.textAr : r.textEn}</p>
+        <div class="review-author">
+          <div class="review-avatar">${r.initial}</div>
+          <div>
+            <div class="review-name">${currentLang === 'ar' ? r.nameAr : r.nameEn}</div>
+            <div class="review-loc">${currentLang === 'ar' ? r.locAr : r.locEn}</div>
+          </div>
+        </div>
+      </div>
+    </div>`).join('');
+  initAnimObserver();
+}
+
+function renderFAQ() {
+  const container = document.getElementById('faqContainer');
+  if (!container) return;
+  container.innerHTML = faqData.map((f, i) => `
+    <div class="faq-item anim" style="transition-delay:${i*0.07}s" id="faq-${i}">
+      <div class="faq-question" onclick="toggleFAQ(${i})">
+        <span>${currentLang === 'ar' ? f.qAr : f.qEn}</span>
+        <i class="bi bi-plus faq-icon"></i>
+      </div>
+      <div class="faq-answer">${currentLang === 'ar' ? f.aAr : f.aEn}</div>
+    </div>`).join('');
+  initAnimObserver();
+}
+
+function renderAll() {
+  renderFeatured();
+  renderBestSellers();
+  renderAllProducts();
+  renderGallery();
+  renderReviews();
+  renderFAQ();
+}
+
+/* ══════════════════════════════════════════════
+   FAQ TOGGLE
+══════════════════════════════════════════════ */
+function toggleFAQ(i) {
+  const item = document.getElementById('faq-' + i);
+  item.classList.toggle('active');
+}
+
+/* ══════════════════════════════════════════════
+   ORDER MODAL
+══════════════════════════════════════════════ */
+let currentProduct = '';
+
+function openOrderModal(productName) {
+  currentProduct = productName;
+  document.getElementById('modalProductTitle').textContent =
+    (currentLang === 'ar' ? 'اطلب: ' : 'Order: ') + productName;
+  document.getElementById('orderName').value = '';
+  document.getElementById('orderColor').value = '';
+  document.getElementById('orderQty').value = 1;
+  document.getElementById('orderNotes').value = '';
+  new bootstrap.Modal(document.getElementById('orderModal')).show();
+}
+
+function submitOrder() {
+  const name = document.getElementById('orderName').value.trim();
+  const color = document.getElementById('orderColor').value;
+  const qty = document.getElementById('orderQty').value;
+  const notes = document.getElementById('orderNotes').value.trim();
+
+  let msg;
+  if (currentLang === 'ar') {
+    msg = `مرحباً، أود طلب: ${currentProduct}\nالاسم: ${name || 'غير محدد'}\nاللون: ${color || 'غير محدد'}\nالكمية: ${qty}\n${notes ? 'ملاحظات: ' + notes : ''}\nوأرغب بمعرفة التفاصيل.`;
+  } else {
+    msg = `Hello, I would like to order: ${currentProduct}\nName: ${name || 'Not specified'}\nColor: ${color || 'Not specified'}\nQuantity: ${qty}\n${notes ? 'Notes: ' + notes : ''}\nPlease send me more details.`;
+  }
+
+  bootstrap.Modal.getInstance(document.getElementById('orderModal')).hide();
+  window.open('https://wa.me/201098517116?text=' + encodeURIComponent(msg), '_blank');
+}
+
+/* ══════════════════════════════════════════════
+   LIGHTBOX
+══════════════════════════════════════════════ */
+let lbCurrent = 0;
+const lbImages = []; // populated dynamically by renderGallery()
+
+function openLightbox(idx) {
+  lbCurrent = idx;
+  document.getElementById('lbImg').src = lbImages[idx];
+  document.getElementById('lightbox').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function lbNav(dir) {
+  lbCurrent = (lbCurrent + dir + lbImages.length) % lbImages.length;
+  document.getElementById('lbImg').src = lbImages[lbCurrent];
+}
+
+document.getElementById('lightbox').addEventListener('click', function(e) {
+  if (e.target === this) closeLightbox();
+});
+
+/* ══════════════════════════════════════════════
+   PAGE NAVIGATION
+══════════════════════════════════════════════ */
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  setTimeout(initAnimObserver, 100);
+}
+
+function closeNav() {
+  const nav = document.getElementById('navMenu');
+  if (nav.classList.contains('show')) {
+    bootstrap.Collapse.getInstance(nav)?.hide();
+  }
+}
+
+/* ══════════════════════════════════════════════
+   SCROLL ANIMATIONS
+══════════════════════════════════════════════ */
+function initAnimObserver() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.anim:not(.visible)').forEach(el => observer.observe(el));
+}
+
+/* ══════════════════════════════════════════════
+   NAVBAR SCROLL
+══════════════════════════════════════════════ */
+window.addEventListener('scroll', () => {
+  document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 60);
+  document.getElementById('scrollTop').classList.toggle('visible', window.scrollY > 300);
+});
+
+/* ══════════════════════════════════════════════
+   COUNTDOWN TIMER
+══════════════════════════════════════════════ */
+const endDate = new Date();
+endDate.setDate(endDate.getDate() + 7);
+endDate.setHours(endDate.getHours() + 12);
+
+function updateCountdown() {
+  const now = new Date();
+  const diff = endDate - now;
+  if (diff <= 0) return;
+  const d = Math.floor(diff / (1000*60*60*24));
+  const h = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+  const m = Math.floor((diff % (1000*60*60)) / (1000*60));
+  const s = Math.floor((diff % (1000*60)) / 1000);
+  const fmt = n => String(n).padStart(2,'0');
+  const dEl = document.getElementById('cd-days');
+  const hEl = document.getElementById('cd-hours');
+  const mEl = document.getElementById('cd-mins');
+  const sEl = document.getElementById('cd-secs');
+  if (dEl) dEl.textContent = fmt(d);
+  if (hEl) hEl.textContent = fmt(h);
+  if (mEl) mEl.textContent = fmt(m);
+  if (sEl) sEl.textContent = fmt(s);
+}
+
+setInterval(updateCountdown, 1000);
+updateCountdown();
+
+/* ══════════════════════════════════════════════
+   INIT
+══════════════════════════════════════════════ */
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('hidden');
+  }, 2200);
+
+  renderAll();
+  initAnimObserver();
+});
+</script>
+</body>
+</html>

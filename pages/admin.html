@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>لوحة التحكم — Laser Shop Admin</title>
+<link rel="icon" type="image/png" href="../WhatsApp Image 2026-03-05 at 10.30.00 PM.jpeg"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+<style>
+:root {
+  --gold: #E2BA55;
+  --gold-light: #F0D070;
+  --gold-dark: #B8943A;
+  --gold-grad: linear-gradient(135deg, #B8943A, #E2BA55, #F0D070, #E2BA55);
+  --black: #0A0A0A;
+  --black-soft: #111111;
+  --black-card: #181818;
+  --black-border: #2A2A2A;
+  --purple: #4A1F72;
+  --white: #F0E8D0;
+  --white-dim: #C8BA9E;
+  --muted: #8A7860;
+  --danger: #C0392B;
+  --danger-hover: #E74C3C;
+  --success: #27AE60;
+  --font: 'Cairo', sans-serif;
+  --radius: 6px;
+  --sidebar-w: 260px;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--font);
+  min-height: 100vh;
+  direction: rtl;
+}
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--black); }
+::-webkit-scrollbar-thumb { background: var(--gold-dark); }
+
+/* ─── LOGIN SCREEN ─── */
+#loginSection {
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  background:
+    radial-gradient(ellipse 70% 70% at 50% 50%, rgba(74,31,114,0.3) 0%, transparent 70%),
+    var(--black);
+  padding: 20px;
+}
+
+.login-box {
+  background: var(--black-card);
+  border: 1px solid rgba(226,186,85,0.25);
+  width: 100%; max-width: 420px;
+  padding: 48px 40px;
+  position: relative;
+}
+.login-box::before, .login-box::after {
+  content: '';
+  position: absolute;
+  width: 20px; height: 20px;
+}
+.login-box::before { top: 8px; right: 8px; border-top: 2px solid var(--gold); border-right: 2px solid var(--gold); }
+.login-box::after { bottom: 8px; left: 8px; border-bottom: 2px solid var(--gold); border-left: 2px solid var(--gold); }
+
+.login-logo {
+  text-align: center; margin-bottom: 32px;
+}
+.login-logo .brand {
+  font-size: 1.4rem; font-weight: 800; letter-spacing: 0.1em;
+  background: var(--gold-grad);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.login-logo .sub {
+  font-size: 0.75rem; color: var(--muted);
+  letter-spacing: 0.15em; margin-top: 4px;
+}
+.login-title {
+  font-size: 1rem; font-weight: 700; color: var(--white);
+  text-align: center; margin-bottom: 28px;
+}
+
+.form-group { margin-bottom: 18px; }
+.form-group label {
+  display: block; font-size: 0.78rem; font-weight: 600;
+  color: var(--white-dim); margin-bottom: 7px;
+}
+.form-group input {
+  width: 100%; background: var(--black);
+  border: 1px solid var(--black-border);
+  color: var(--white); padding: 11px 14px;
+  font-family: var(--font); font-size: 0.88rem;
+  border-radius: 0; outline: none;
+  transition: border-color 0.3s;
+}
+.form-group input:focus { border-color: rgba(226,186,85,0.5); }
+.form-group input::placeholder { color: var(--muted); }
+
+.btn-login {
+  width: 100%; background: var(--gold-grad);
+  color: var(--black); border: none;
+  padding: 13px; font-family: var(--font);
+  font-size: 0.9rem; font-weight: 800;
+  cursor: pointer; letter-spacing: 0.08em;
+  transition: opacity 0.3s, transform 0.3s;
+  margin-top: 8px;
+}
+.btn-login:hover { opacity: 0.9; transform: translateY(-1px); }
+.btn-login:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+.login-error {
+  color: #FF6B6B; font-size: 0.78rem;
+  text-align: center; margin-top: 12px;
+  min-height: 20px;
+}
+
+/* ─── DASHBOARD LAYOUT ─── */
+#dashboardSection { display: none; }
+
+.admin-layout { display: flex; min-height: 100vh; }
+
+/* Sidebar */
+.admin-sidebar {
+  width: var(--sidebar-w); flex-shrink: 0;
+  background: var(--black-soft);
+  border-left: 1px solid var(--black-border);
+  display: flex; flex-direction: column;
+  position: sticky; top: 0; height: 100vh;
+  overflow-y: auto;
+}
+.sidebar-brand {
+  padding: 24px 20px;
+  border-bottom: 1px solid var(--black-border);
+}
+.sidebar-brand .name {
+  font-size: 1.1rem; font-weight: 800;
+  background: var(--gold-grad);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.sidebar-brand .role {
+  font-size: 0.68rem; color: var(--muted);
+  letter-spacing: 0.1em; margin-top: 2px;
+}
+
+.sidebar-nav { padding: 16px 12px; flex: 1; }
+.sidebar-nav a {
+  display: flex; align-items: center; gap: 12px;
+  padding: 11px 14px; color: var(--white-dim);
+  text-decoration: none; font-size: 0.85rem;
+  border-radius: var(--radius);
+  transition: all 0.25s; margin-bottom: 4px;
+  font-weight: 500;
+}
+.sidebar-nav a:hover { background: rgba(226,186,85,0.07); color: var(--gold); }
+.sidebar-nav a.active { background: rgba(226,186,85,0.12); color: var(--gold); border-right: 2px solid var(--gold); }
+.sidebar-nav a i { font-size: 1.05rem; width: 20px; }
+
+.sidebar-footer {
+  padding: 16px 12px;
+  border-top: 1px solid var(--black-border);
+}
+.btn-logout {
+  display: flex; align-items: center; gap: 10px;
+  width: 100%; background: transparent;
+  border: 1px solid rgba(192,57,43,0.3);
+  color: #E74C3C; padding: 10px 14px;
+  font-family: var(--font); font-size: 0.82rem;
+  cursor: pointer; border-radius: var(--radius);
+  transition: all 0.25s; font-weight: 600;
+}
+.btn-logout:hover { background: rgba(192,57,43,0.1); border-color: #E74C3C; }
+
+/* Main content */
+.admin-main { flex: 1; padding: 32px; overflow-x: hidden; }
+
+.admin-topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 32px; flex-wrap: wrap; gap: 12px;
+}
+.admin-page-title {
+  font-size: 1.5rem; font-weight: 800; color: var(--white);
+}
+.admin-page-title span { color: var(--gold); }
+
+.admin-stats-row {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px; margin-bottom: 36px;
+}
+.stat-card {
+  background: var(--black-card);
+  border: 1px solid var(--black-border);
+  padding: 20px 18px;
+  transition: border-color 0.3s;
+}
+.stat-card:hover { border-color: rgba(226,186,85,0.3); }
+.stat-card .val {
+  font-size: 2rem; font-weight: 800; color: var(--gold); line-height: 1;
+}
+.stat-card .lbl {
+  font-size: 0.72rem; color: var(--muted);
+  margin-top: 6px; letter-spacing: 0.08em;
+}
+
+/* ─── PANELS ─── */
+.admin-panel {
+  background: var(--black-card);
+  border: 1px solid var(--black-border);
+  margin-bottom: 28px;
+}
+.admin-panel-header {
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--black-border);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.admin-panel-title {
+  font-size: 0.95rem; font-weight: 700; color: var(--gold);
+  display: flex; align-items: center; gap: 10px;
+}
+.admin-panel-body { padding: 24px 22px; }
+
+/* ─── PRODUCT FORM ─── */
+.form-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+}
+@media (max-width: 640px) { .form-grid { grid-template-columns: 1fr; } }
+
+.form-field { margin-bottom: 0; }
+.form-field.full { grid-column: 1 / -1; }
+.form-field label {
+  display: block; font-size: 0.78rem; font-weight: 600;
+  color: var(--white-dim); margin-bottom: 7px;
+}
+.form-field input,
+.form-field textarea,
+.form-field select {
+  width: 100%; background: var(--black);
+  border: 1px solid var(--black-border);
+  color: var(--white); padding: 10px 13px;
+  font-family: var(--font); font-size: 0.85rem;
+  border-radius: 0; outline: none;
+  transition: border-color 0.25s;
+}
+.form-field input:focus,
+.form-field textarea:focus,
+.form-field select:focus { border-color: rgba(226,186,85,0.5); }
+.form-field input::placeholder,
+.form-field textarea::placeholder { color: var(--muted); }
+.form-field textarea { resize: vertical; min-height: 80px; }
+.form-field select option { background: var(--black-card); }
+
+.form-field input[type="file"] {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.image-preview-wrap {
+  display: none; margin-top: 10px;
+  border: 1px solid var(--black-border); padding: 8px;
+  max-width: 200px;
+}
+.image-preview-wrap img {
+  width: 100%; max-height: 160px;
+  object-fit: cover; display: block;
+}
+
+.checkbox-field {
+  display: flex; align-items: center; gap: 10px;
+  margin-top: 4px;
+}
+.checkbox-field input[type="checkbox"] {
+  width: 18px; height: 18px; cursor: pointer;
+  accent-color: var(--gold);
+  flex-shrink: 0; padding: 0;
+}
+.checkbox-field label {
+  font-size: 0.82rem; color: var(--white-dim);
+  cursor: pointer; margin: 0;
+}
+
+.upload-status {
+  font-size: 0.78rem; color: var(--gold);
+  margin-top: 6px; min-height: 18px;
+}
+
+/* imgbb guide box */
+.imgbb-guide {
+  background: rgba(226,186,85,0.06);
+  border: 1px solid rgba(226,186,85,0.2);
+  border-right: 3px solid var(--gold);
+  padding: 12px 16px;
+  margin-bottom: 12px;
+  font-size: 0.8rem;
+  color: var(--white-dim);
+  line-height: 1.8;
+}
+.imgbb-guide span {
+  font-weight: 700; color: var(--gold);
+  display: block; margin-bottom: 6px;
+}
+.imgbb-guide ol {
+  margin: 0; padding-right: 18px;
+}
+.imgbb-guide a {
+  color: var(--gold-light);
+  font-weight: 700;
+}
+.imgbb-guide strong { color: var(--white); }
+
+.form-actions {
+  display: flex; gap: 12px; margin-top: 22px;
+  flex-wrap: wrap;
+}
+.btn-save {
+  background: var(--gold-grad);
+  color: var(--black); border: none;
+  padding: 11px 28px; font-family: var(--font);
+  font-size: 0.85rem; font-weight: 800;
+  cursor: pointer; display: flex; align-items: center; gap: 8px;
+  transition: opacity 0.25s, transform 0.25s;
+}
+.btn-save:hover { opacity: 0.88; transform: translateY(-1px); }
+.btn-save:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
+
+.btn-cancel {
+  display: none;
+  background: transparent;
+  border: 1px solid var(--black-border);
+  color: var(--muted); padding: 11px 24px;
+  font-family: var(--font); font-size: 0.82rem;
+  cursor: pointer; align-items: center; gap: 8px;
+  transition: all 0.25s;
+}
+.btn-cancel:hover { border-color: var(--white-dim); color: var(--white); }
+
+/* ─── PRODUCT LIST ─── */
+#productsList { display: flex; flex-direction: column; gap: 12px; }
+
+.admin-loading, .admin-empty, .admin-error {
+  text-align: center; padding: 40px;
+  color: var(--muted); font-size: 0.9rem;
+}
+.admin-error { color: #E74C3C; }
+
+.admin-product-card {
+  background: var(--black);
+  border: 1px solid var(--black-border);
+  display: flex; align-items: center; gap: 16px;
+  padding: 14px 16px;
+  transition: border-color 0.25s;
+}
+.admin-product-card:hover { border-color: rgba(226,186,85,0.25); }
+
+.admin-product-img {
+  width: 72px; height: 72px; flex-shrink: 0;
+  background: var(--black-soft);
+  border: 1px solid var(--black-border);
+  overflow: hidden; display: flex; align-items: center; justify-content: center;
+}
+.admin-product-img img { width: 100%; height: 100%; object-fit: cover; }
+.admin-no-img { font-size: 0.65rem; color: var(--muted); text-align: center; padding: 4px; }
+
+.admin-product-info { flex: 1; min-width: 0; }
+.admin-product-name {
+  font-weight: 700; font-size: 0.9rem; color: var(--white);
+  margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.admin-product-name-en {
+  font-size: 0.75rem; color: var(--muted); margin-bottom: 4px;
+}
+.admin-product-badge {
+  font-size: 0.7rem; color: var(--gold);
+}
+
+.admin-product-actions {
+  display: flex; gap: 8px; flex-shrink: 0; flex-wrap: wrap;
+}
+.admin-btn-edit {
+  background: rgba(226,186,85,0.1);
+  border: 1px solid rgba(226,186,85,0.35);
+  color: var(--gold); padding: 7px 14px;
+  font-family: var(--font); font-size: 0.75rem;
+  cursor: pointer; display: flex; align-items: center; gap: 5px;
+  transition: all 0.25s; font-weight: 600;
+}
+.admin-btn-edit:hover { background: var(--gold); color: var(--black); }
+
+.admin-btn-delete {
+  background: rgba(192,57,43,0.1);
+  border: 1px solid rgba(192,57,43,0.3);
+  color: #E74C3C; padding: 7px 14px;
+  font-family: var(--font); font-size: 0.75rem;
+  cursor: pointer; display: flex; align-items: center; gap: 5px;
+  transition: all 0.25s; font-weight: 600;
+}
+.admin-btn-delete:hover { background: var(--danger); color: white; border-color: var(--danger); }
+
+/* ─── TOAST ─── */
+#adminToast {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px);
+  background: var(--black-card);
+  border: 1px solid rgba(226,186,85,0.4);
+  color: var(--gold); padding: 12px 28px;
+  font-size: 0.85rem; font-weight: 600;
+  z-index: 9999;
+  transition: transform 0.4s cubic-bezier(.25,.46,.45,.94), opacity 0.4s;
+  opacity: 0;
+  white-space: nowrap;
+}
+#adminToast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+/* ─── DIVIDER ─── */
+.admin-divider { border: none; border-top: 1px solid var(--black-border); margin: 0; }
+
+/* ─── Back to site link ─── */
+.back-link {
+  display: inline-flex; align-items: center; gap: 8px;
+  color: var(--muted); font-size: 0.78rem;
+  text-decoration: none; transition: color 0.25s;
+  padding: 10px 14px;
+}
+.back-link:hover { color: var(--gold); }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 768px) {
+  .admin-sidebar { width: 200px; }
+  .admin-main { padding: 20px 16px; }
+}
+@media (max-width: 600px) {
+  .admin-layout { flex-direction: column; }
+  .admin-sidebar {
+    width: 100%; height: auto;
+    position: static;
+    flex-direction: row; flex-wrap: wrap;
+  }
+  .admin-sidebar .sidebar-nav { display: flex; flex-wrap: wrap; padding: 8px; }
+  .admin-sidebar .sidebar-nav a { padding: 8px 12px; font-size: 0.78rem; }
+  .admin-product-card { flex-wrap: wrap; }
+}
+
+/* ─── INSTRUCTIONS BOX ─── */
+.setup-instructions {
+  background: rgba(74,31,114,0.15);
+  border: 1px solid rgba(226,186,85,0.2);
+  border-right: 3px solid var(--gold);
+  padding: 16px 18px;
+  margin-bottom: 20px;
+  font-size: 0.82rem;
+  color: var(--white-dim);
+  line-height: 1.7;
+}
+.setup-instructions strong { color: var(--gold); }
+.setup-instructions code {
+  background: rgba(226,186,85,0.1);
+  padding: 1px 6px;
+  font-family: monospace;
+  color: var(--gold-light);
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════ LOADER ══════════ -->
+<div id="loginSection">
+  <div class="login-box">
+    <div class="login-logo">
+      <div class="brand">✦ LASER SHOP</div>
+      <div class="sub">لوحة التحكم الإدارية</div>
+    </div>
+    <div class="login-title">🔐 تسجيل دخول المسؤول</div>
+
+    <form id="loginForm" autocomplete="off">
+      <div class="form-group">
+        <label for="adminEmail">البريد الإلكتروني</label>
+        <input type="email" id="adminEmail" placeholder="admin@lasershop.com" required/>
+      </div>
+      <div class="form-group">
+        <label for="adminPassword">كلمة المرور</label>
+        <input type="password" id="adminPassword" placeholder="••••••••" required/>
+      </div>
+      <button type="submit" class="btn-login" id="loginBtn">دخول</button>
+      <div class="login-error" id="loginError"></div>
+    </form>
+
+    <div style="margin-top:20px; padding-top:16px; border-top:1px solid var(--black-border); font-size:0.72rem; color:var(--muted); text-align:center; line-height:1.7;">
+      ⚠️ هذه الصفحة مخصصة لصاحب المتجر فقط<br/>
+      <a href="../index.html" style="color:var(--gold); text-decoration:none;">← العودة للموقع</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ DASHBOARD ══════════ -->
+<div id="dashboardSection">
+  <div class="admin-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-brand">
+        <div class="name">✦ LASER SHOP</div>
+        <div class="role">Admin Dashboard</div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="#" class="active" onclick="scrollToSection('productFormSection'); return false;">
+          <i class="bi bi-plus-circle-fill"></i> إضافة منتج
+        </a>
+        <a href="#" onclick="scrollToSection('productsListSection'); return false;">
+          <i class="bi bi-grid-fill"></i> قائمة المنتجات
+        </a>
+        <a href="../index.html" target="_blank">
+          <i class="bi bi-box-arrow-up-left"></i> عرض الموقع
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button class="btn-logout" id="logoutBtn">
+          <i class="bi bi-box-arrow-right"></i> تسجيل الخروج
+        </button>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="admin-main">
+
+      <!-- Topbar -->
+      <div class="admin-topbar">
+        <div class="admin-page-title">لوحة تحكم <span>Laser Shop</span></div>
+        <a href="../index.html" target="_blank" class="back-link">
+          <i class="bi bi-arrow-left"></i> عرض الموقع
+        </a>
+      </div>
+
+      <!-- Stats -->
+      <div class="admin-stats-row">
+        <div class="stat-card">
+          <div class="val" id="statTotal">—</div>
+          <div class="lbl">إجمالي المنتجات</div>
+        </div>
+        <div class="stat-card">
+          <div class="val" id="statBestSeller">—</div>
+          <div class="lbl">الأكثر مبيعًا</div>
+        </div>
+        <div class="stat-card">
+          <div class="val" id="statFeatured">—</div>
+          <div class="lbl">مميز في الرئيسية</div>
+        </div>
+      </div>
+
+      <!-- ADD / EDIT PRODUCT FORM -->
+      <div class="admin-panel" id="productFormSection">
+        <div class="admin-panel-header">
+          <div class="admin-panel-title">
+            <i class="bi bi-plus-circle-fill"></i>
+            <span id="formTitle">➕ إضافة منتج جديد</span>
+          </div>
+        </div>
+        <div class="admin-panel-body">
+          <form id="productForm">
+            <div class="form-grid">
+
+              <div class="form-field">
+                <label>اسم المنتج (عربي) *</label>
+                <input type="text" id="pNameAr" placeholder="مثال: ركن صلاة خشبي" required/>
+              </div>
+              <div class="form-field">
+                <label>اسم المنتج (إنجليزي)</label>
+                <input type="text" id="pNameEn" placeholder="e.g. Wooden Prayer Corner" dir="ltr"/>
+              </div>
+
+              <div class="form-field">
+                <label>وصف المنتج (عربي)</label>
+                <textarea id="pDescAr" placeholder="وصف قصير بالعربية..."></textarea>
+              </div>
+              <div class="form-field">
+                <label>وصف المنتج (إنجليزي)</label>
+                <textarea id="pDescEn" placeholder="Short description in English..." dir="ltr"></textarea>
+              </div>
+
+              <div class="form-field">
+                <label>البادج / الشارة</label>
+                <select id="pBadge">
+                  <option value="">— بدون شارة —</option>
+                  <option value="bestseller">🔥 الأكثر مبيعًا</option>
+                  <option value="new">✨ جديد</option>
+                  <option value="exclusive">💜 تصميم حصري</option>
+                </select>
+              </div>
+              <div class="form-field" style="display:flex; align-items:flex-end; padding-bottom:8px;">
+                <div class="checkbox-field">
+                  <input type="checkbox" id="pFeatured"/>
+                  <label for="pFeatured">⭐ إظهار في القسم المميز (الصفحة الرئيسية)</label>
+                </div>
+              </div>
+
+              <div class="form-field full">
+                <label>🖼️ رابط صورة المنتج</label>
+                <div class="imgbb-guide">
+                  <span>📌 كيف ترفع الصورة؟</span>
+                  <ol>
+                    <li>افتح <a href="https://postimages.org/" target="_blank">postimages</a></li>
+                    <li>اضغط <strong>Start uploading</strong> وارفع الصورة</li>
+                    <li>بعد الرفع اضغط على الصورة ← <strong>Direct link</strong> وانسخه</li>
+                    <li>الصق الرابط في الخانة أدناه 👇</li>
+                  </ol>
+                </div>
+                <input type="url" id="pImageUrl" placeholder="https://i.ibb.co/xxxxxx/product.jpg" dir="ltr"/>
+                <div class="upload-status" id="uploadStatus"></div>
+                <div class="image-preview-wrap" id="imagePreviewWrap">
+                  <img id="imagePreview" src="" alt="Preview"/>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn-save" id="saveBtn">
+                <i class="bi bi-check-circle-fill"></i> ✅ إضافة المنتج
+              </button>
+              <button type="button" class="btn-cancel" id="cancelEditBtn">
+                <i class="bi bi-x-circle"></i> إلغاء التعديل
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- PRODUCTS LIST -->
+      <div class="admin-panel" id="productsListSection">
+        <div class="admin-panel-header">
+          <div class="admin-panel-title">
+            <i class="bi bi-grid-fill"></i> قائمة المنتجات
+          </div>
+          <button onclick="window.location.reload()" style="background:transparent;border:none;color:var(--muted);cursor:pointer;font-size:1.1rem;" title="تحديث">
+            <i class="bi bi-arrow-clockwise"></i>
+          </button>
+        </div>
+        <div class="admin-panel-body" style="padding:0;">
+          <div id="productsList" style="padding:16px;">
+            <div class="admin-loading">جاري التحميل...</div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<div id="adminToast"></div>
+
+<script type="module">
+  import { initAdmin } from "../js/admin.js";
+  import { fetchProducts } from "../js/products.js";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    initAdmin();
+
+    // Update stats after products load
+    window.updateStats = async function() {
+      try {
+        const products = await fetchProducts();
+        document.getElementById("statTotal").textContent = products.length;
+        document.getElementById("statBestSeller").textContent = products.filter(p => p.isBestSeller).length;
+        document.getElementById("statFeatured").textContent = products.filter(p => p.isFeatured).length;
+      } catch {}
+    };
+  });
+
+  window.scrollToSection = function(id) {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  };
+</script>
+</body>
+</html>
